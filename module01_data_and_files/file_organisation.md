@@ -1,34 +1,60 @@
+adapted and expanded from (http://rpubs.com/minebocek/user2017-ors)
+
 # Motivation
 
 ![motivation](https://github.com/tavareshugo/slcu_r_course/blob/master/module01_data_and_files/xkcd_documents.png)
 
+- There will be files, lots of files
+- Files will change over time
+- Thy will have complex relationships, that can also change over time
+
+File organisation and naming - effective weapons against chaos.
+
 # How to name files:
+### Main principle: be consistent and descriptive
 
-### Use common sense and be consistent
-Here are some general guidelines:
+Here are some key principles for file names:
 
-- Keep file names short, but meaningful:
-Good practice:
+- Name should be machine readable:
+Why:
+  - easy to search for files later
+  - easy to arrow file lists based on names
+  - easy to extract information from file names
+Tips:
+  - Order the elements in a file name from general to specific
+  - Avoid special characters  * : \ / < > | " ? [ ] ; = + & £ $
+  - Don't use spaces to separate elements in file name
+  - Chose a convention and stick to it
 
-Bad practice:
+- Names should be human readable:  
+Why:
+  - name contains information on content
+  - name contains semantics (place in workflow)
 
-- Order the elements in a file name from general to specific:
-Good practice:
+Tips:
+  - Don't use initials, abbreviations and codes that are not commonly understood  
+  - Keep file names short, but meaningful.
 
-Bad practice:
+- File names should play well with default ordering
+Tips:
+  - use numeric prefix to induce logic order
+  - left pad numbers with zeroes
+  - use YYYY-mm-dd standard for dates
 
-- Use two-digit numbers rather than one:
-Good practice:
+===
 
-Bad practice:
-
-- Chose a convention and stick to it
-
-- Don't use initials, abbreviations and codes that are not commonly understood
-
-- Avoid special characters  * : \ / < > | " ? [ ] ; = + & £ $
-
-- Power skills: meaningful file names can be parsed as metadata
-(include example)
+- Power skills: meaningful and well organised file names can be parsed as
+metadata (include example)
+- Never use 'final' in the file name :) More about version control later.
 
 # How to organise files in folders:
+
+- keep raw data separately and (never)! change the original copy
+- readme with short file descriotion
+
+# Version control
+
+
+References:
+
+Noble, William Stafford. 2009. “A Quick Guide to Organizing Computational Biology Projects.” PLoS Computational Biology 5 (7): e1000424.
