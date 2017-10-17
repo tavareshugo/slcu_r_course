@@ -1,8 +1,6 @@
 adapted and expanded from (http://rpubs.com/minebocek/user2017-ors)
 
-# Motivation
-
-![motivation](https://github.com/tavareshugo/slcu_r_course/blob/master/module01_data_and_files/xkcd_documents.png)
+## Motivation
 
 - There will be files, lots of files
 - Files will change over time
@@ -10,33 +8,39 @@ adapted and expanded from (http://rpubs.com/minebocek/user2017-ors)
 
 File organisation and naming - effective weapons against chaos.
 
-# How to name files:
-### Main principle: be consistent and descriptive
+![motivation](https://github.com/tavareshugo/slcu_r_course/blob/master/module01_data_and_files/xkcd_documents.png)
 
+
+## How to name files:
 Here are some key principles for file names:
 
 - Name should be machine readable:
-Why:
+
+**Why**:
+
   - easy to search for files later
   - easy to arrow file lists based on names
   - easy to extract information from file names
-Tips:
-  - Order the elements in a file name from general to specific
-  - Avoid special characters  * : \ / < > | " ? [ ] ; = + & £ $
-  - Don't use spaces to separate elements in file name
-  - Chose a convention and stick to it
+  
+**Tips**:
 
-- Names should be human readable:  
-Why:
+  - order the elements in a file name from general to specific
+  - avoid special characters  * : \ / < > | " ? [ ] ; = + & £ $
+  - don't use spaces to separate elements in file name
+  - chose a convention and stick to it
+
+- Names should be human readable:
+
+**Tips**:
+
   - name contains information on content
   - name contains semantics (place in workflow)
-
-Tips:
-  - Don't use initials, abbreviations and codes that are not commonly understood  
-  - Keep file names short, but meaningful.
+  - don't use initials, abbreviations and codes that are not commonly understood  
+  - keep file names short, but meaningful.
 
 - File names should play well with default ordering
-Tips:
+
+**Tips:**
   - use numeric prefix to induce logic order
   - left pad numbers with zeroes
   - use YYYY-mm-dd standard for dates
