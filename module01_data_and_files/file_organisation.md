@@ -8,48 +8,42 @@ adapted and expanded from (http://rpubs.com/minebocek/user2017-ors)
 
 File organisation and naming - effective weapons against chaos.
 
-![motivation](https://github.com/tavareshugo/slcu_r_course/blob/master/module01_data_and_files/xkcd_documents.png)
+![motivation](https://github.com/tavareshugo/slcu_r_course/blob/master/module01_data_and_files/xkcd_documents.png=250x)
 
 
 ## How to name files:
 Here are some key principles for file names:
 
-- Name should be machine readable:
-
-**Why**:
-
+1) Name should be machine readable:
   - easy to search for files later
   - easy to arrow file lists based on names
   - easy to extract information from file names
   
-**Tips**:
+How to achieve:
 
   - order the elements in a file name from general to specific
   - avoid special characters  * : \ / < > | " ? [ ] ; = + & £ $
   - don't use spaces to separate elements in file name
   - chose a convention and stick to it
 
-- Names should be human readable:
+2) Names should be human readable:
 
-**Tips**:
+How to achieve:
 
   - name contains information on content
   - name contains semantics (place in workflow)
   - don't use initials, abbreviations and codes that are not commonly understood  
   - keep file names short, but meaningful.
 
-- File names should play well with default ordering
+3) File names should play well with default ordering
 
-**Tips:**
+How to achieve:
   - use numeric prefix to induce logic order
   - left pad numbers with zeroes
   - use YYYY-mm-dd standard for dates
 
-===
 
-- Power skills: meaningful and well organised file names can be parsed as
-metadata (include example)
-- Never use 'final' in the file name :) More about version control later.
+### Exercise:
 
 # How to organise files in folders:
 
