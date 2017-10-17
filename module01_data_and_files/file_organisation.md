@@ -10,7 +10,6 @@ File organisation and naming - effective weapons against chaos.
 
 ![motivation](https://github.com/tavareshugo/slcu_r_course/blob/master/module01_data_and_files/xkcd_documents.png)
 
-
 ## How to name files:
 Here are some key principles for file names:
 
@@ -47,10 +46,20 @@ How to achieve:
   - left pad numbers with zeroes
   - use YYYY-mm-dd standard for dates
 
-
 ### Exercise:
 
+You are collecting data on expresssion of your favourite gene in different accessions of Arabidopsis plants during the day.
+The experiment is large, so you perform the measurments on different days. Expression of your gene might be affected by temerature, so for each accession you have readings at low (15 C) and high temerature (25 C). As a diligent reasercher, you perform each experiment in 3 replicates.
 
+How would you organise your data files? Suggest a file naming scheme which is both machine and human readable, file names should contain:
+
+- date of experiment;
+- type of assay;
+- gene of interest;
+- Arabidopsis accession;
+- time point;
+- replicate number;
+- temperature.
 
 ## How to organise files in folders:
 
@@ -60,6 +69,6 @@ How to achieve:
 ## Version control
 
 
-References:
+## Further reading:
 
 Noble, William Stafford. 2009. “A Quick Guide to Organizing Computational Biology Projects.” PLoS Computational Biology 5 (7): e1000424.
