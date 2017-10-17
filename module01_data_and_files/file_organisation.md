@@ -8,13 +8,13 @@ adapted and expanded from (http://rpubs.com/minebocek/user2017-ors)
 
 File organisation and naming - effective weapons against chaos.
 
-![motivation](https://github.com/tavareshugo/slcu_r_course/blob/master/module01_data_and_files/xkcd_documents.png=250x)
+![motivation](https://github.com/tavareshugo/slcu_r_course/blob/master/module01_data_and_files/xkcd_documents.png)
 
 
 ## How to name files:
 Here are some key principles for file names:
 
-1) Name should be machine readable:
+1) **Name should be machine readable:**
   - easy to search for files later
   - easy to arrow file lists based on names
   - easy to extract information from file names
@@ -26,7 +26,7 @@ How to achieve:
   - don't use spaces to separate elements in file name
   - chose a convention and stick to it
 
-2) Names should be human readable:
+2) **Names should be human readable:**
 
 How to achieve:
 
@@ -35,7 +35,7 @@ How to achieve:
   - don't use initials, abbreviations and codes that are not commonly understood  
   - keep file names short, but meaningful.
 
-3) File names should play well with default ordering
+3) **File names should play well with default ordering**
 
 How to achieve:
   - use numeric prefix to induce logic order
@@ -45,12 +45,14 @@ How to achieve:
 
 ### Exercise:
 
-# How to organise files in folders:
+
+
+## How to organise files in folders:
 
 - keep raw data separately and (never)! change the original copy
 - readme with short file descriotion
 
-# Version control
+## Version control
 
 
 References:
