@@ -24,7 +24,12 @@ How to achieve:
   - order the elements in a file name from general to specific
   - avoid special characters  * : \ / < > | " ? [ ] ; = + & £ $
   - don't use spaces to separate elements in file name
-  - chose a convention and stick to it
+  - chose a convention and stick to it:
+    - alllowercase: e.g. adjustcolor
+    - period.separated: e.g. plot.new
+    - underscore_separated: e.g. numeric_version
+    - lowerCamelCase: e.g. addTaskCallback
+    - UpperCamelCase: e.g. SignatureMethod
 
 2) **Names should be human readable:**
 
