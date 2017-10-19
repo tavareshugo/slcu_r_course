@@ -26,6 +26,8 @@ Will do this with Rmarkdown.
 * Need to find example dataset (maybe something published?)
     * Couple of measured stuff
     * A few factor variables
+    * Possibilities: 
+         * https://datadryad.org/resource/doi:10.5061/dryad.65d76 - could try to recreate some of the plots in the paper
 
 * Read the data in
 * Sanity check data import
