@@ -56,10 +56,16 @@ In this session, we're going to discuss:
 
 > **Exercise**: 
 >
-> - Open the "dataset_messy.xls" spreadsheet located in the "data" directory
-- Based on the principles outlined above, write down what problems you find with 
-the dataset
-- Open discussion: what problems did you find? And how did you solve them?
+> A survey was done to determine the sex and weights of different animals 
+occurring in different experimental plots. The experiment was repeated in two years.
+>
+> - The data for this survey is in the file "dataset_messy.xls" located in the 
+"data" directory
+- Based on the principles outlined above, make a note of what data-formating 
+problems you find with this dataset.
+>
+> Open discussion: what data-formating problems did you find? And how would you 
+solve them?
 
 
 ## Data Organisation: formatting problems
