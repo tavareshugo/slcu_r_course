@@ -63,6 +63,19 @@ How would you organise your data files? Suggest a file naming scheme which is bo
 
 ## How to organise files in folders:
 
+Research projects are quite different and file organisation scheme depends on the types of data you are dealing with.
+Poor organisation choices can slow down research progress.
+
+- Core principle: 'Someone unfamiliar with your project should be able to look at your files and undersnad what you did in detail and why'. This someone could be collaborator/reviewer/future self
+- Everything you do you will probably have to do again (repeat experiment with more conditions / reviewer requested additional experiments/ you need to explain your work to a student).
+
+Some general principles:
+
+- decide orgaisational structure before starting a project
+- store all the files relevant for a project in one common directory
+- 
+
+  
 - keep raw data separately and (never)! change the original copy
 - readme with short file descriotion
 
@@ -72,3 +85,6 @@ How would you organise your data files? Suggest a file naming scheme which is bo
 ## Further reading:
 
 Noble, William Stafford. 2009. “A Quick Guide to Organizing Computational Biology Projects.” PLoS Computational Biology 5 (7): e1000424.
+Hart et al. 2016 “Ten Simple Rules for Digital Data Storage”. PLOS Computational Biology.
+Adaptable data management for systems biology investigations https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-10-79?site=bmcbioinformatics.biomedcentral.com
+
