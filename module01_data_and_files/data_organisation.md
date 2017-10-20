@@ -61,7 +61,7 @@ occurring in different experimental plots. The experiment was repeated in two ye
 >
 > - The data for this survey is in the file "dataset_messy.xls" located in the 
 "data" directory
-- Based on the principles outlined above, make a note of what data-formating 
+> - Based on the principles outlined above, make a note of what data-formating 
 problems you find with this dataset.
 >
 > Open discussion: what data-formating problems did you find? And how would you 
