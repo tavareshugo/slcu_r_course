@@ -1,0 +1,66 @@
+---
+title: "Data Exploration with R"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(visdat)
+```
+
+
+```{r}
+# Read data directly from web but later save it as csv?
+x <- read.table("https://datadryad.org/bitstream/handle/10255/dryad.104508/Experiment1.txt?sequence=2", header = TRUE, stringsAsFactors = FALSE) %>% 
+  as.tibble()
+```
+
+We can get an overview of data with `summary` and `dim`
+
+```{r}
+summary(x)
+dim(x)
+```
+
+> What type of variable is "Bolt" and "Treatment"? How about "Temperature"?
+
+Visual representation of your data:
+
+```{r}
+vis_dat(x)
+```
+
+
+# Visualise data
+
+gggplot2
+
+```{r}
+ggplot(x, aes(Treatment, Days.to.Flower)) + 
+  geom_boxplot()
+```
+
+**Exercise: can you make a violing plot instead?**
+
+```{r}
+ggplot(x, aes(Treatment, Days.to.Flower)) + 
+  geom_violin()
+```
+
+
+```{r}
+ggplot(x, aes(Days.to.Bolt, Rosette.leaf.num, colour = Genotype)) + 
+  geom_point()
+```
+
+
+
+# Manipulate data
+
+dplyr
+
+```{r}
+count(x, Bolt, Treatment)
+```
+
+
