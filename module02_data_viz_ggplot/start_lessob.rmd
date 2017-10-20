@@ -3,9 +3,13 @@ title: "Data Exploration with R"
 output: html_document
 ---
 
+
 ```{r}
+
+#install.packages("visdat")
 library(tidyverse)
 library(visdat)
+#library(plotly)
 ```
 
 
@@ -14,6 +18,8 @@ library(visdat)
 x <- read.table("https://datadryad.org/bitstream/handle/10255/dryad.104508/Experiment1.txt?sequence=2", header = TRUE, stringsAsFactors = FALSE) %>% 
   as.tibble()
 ```
+
+Use help for functions. Example: `round` function
 
 We can get an overview of data with `summary` and `dim`
 
@@ -29,6 +35,9 @@ Visual representation of your data:
 ```{r}
 vis_dat(x)
 ```
+
+Mention missing values?
+
 
 
 # Visualise data
@@ -52,6 +61,19 @@ ggplot(x, aes(Treatment, Days.to.Flower)) +
 ggplot(x, aes(Days.to.Bolt, Rosette.leaf.num, colour = Genotype)) + 
   geom_point()
 ```
+
+```{r}
+ggplot(x, aes(Treatment, Days.to.Flower, colour = Treatment)) +
+    geom_jitter() + 
+  geom_boxplot(alpha = 0.5)
+```
+
+```{r}
+p1 <- ggplot(x, aes(Days.to.Bolt, Rosette.leaf.num, colour = Genotype)) + 
+  geom_point()
+plotly::ggplotly(p1)
+```
+
 
 
 
