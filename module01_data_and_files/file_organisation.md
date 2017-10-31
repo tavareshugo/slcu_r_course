@@ -59,13 +59,13 @@ in 3 replicates.
 
 >How would you organise your data files? Suggest a file naming scheme which is both machine and human readable, file names should contain:
 >
-- date of experiment;
-- type of assay;
-- gene of interest;
-- Arabidopsis accession;
-- time point;
-- replicate number;
-- temperature.
+> - date of experiment;
+> - type of assay;
+> - gene of interest;
+> - Arabidopsis accession;
+> - time point;
+> - replicate number;
+> - temperature.
 
 ## How to organise files in folders:
 
