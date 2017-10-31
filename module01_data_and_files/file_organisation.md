@@ -48,17 +48,17 @@ How to achieve:
   - left pad numbers with zeroes, e.g. use 01 instead of 1;
   - use YYYY-mm-dd standard for dates.
 
-### Exercise:
+>### Exercise:
 
-You are collecting data on expression of your favourite gene in different
+>You are collecting data on expression of your favourite gene in different
 accessions of Arabidopsis plants during the day. The experiment is large, so you
 perform the measurements on different days. Expression of your gene might be
 affected by temperature, so for each accession you have readings at low (15 C)
 and high temperature (25 C). As a diligent researcher, you perform each experiment
 in 3 replicates.
 
-How would you organise your data files? Suggest a file naming scheme which is both machine and human readable, file names should contain:
-
+>How would you organise your data files? Suggest a file naming scheme which is both machine and human readable, file names should contain:
+>
 - date of experiment;
 - type of assay;
 - gene of interest;
