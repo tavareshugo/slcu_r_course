@@ -130,3 +130,4 @@ the file name:
 - [Ten Simple Rules for Digital Data Storage](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005097)
 - [Adaptable data management for systems biology investigations](https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-10-79?site=bmcbioinformatics.biomedcentral.com)
 - [learn git in 15 minutes](https://try.github.io/levels/1/challenges/1)
+- [Open and Reproducible Science with R](https://try.github.io/levels/1/challenges/1)
