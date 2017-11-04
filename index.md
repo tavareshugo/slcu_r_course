@@ -38,17 +38,17 @@ As an example dataset we will be using real data published by
 
 #### Module 1 
 
-[File organisation](../module01_data_and_files/file_organisation.md)
+[File organisation](module01_data_and_files/file_organisation.md)
 
-[Data organisation](../module01_data_and_files/data_organisation.md)
+[Data organisation](module01_data_and_files/data_organisation.md)
 
 #### Module 2
 
-[Data visualisation](../module02_data_viz_ggplot/start_lesson.Rmd)
+[Data visualisation](module02_data_viz_ggplot/start_lesson.Rmd)
 
 #### Module 3
 
-[Data manipulation](../module03_advanced_data_manipulation_dplyr/next_lesson.Rmd)
+[Data manipulation](module03_advanced_data_manipulation_dplyr/next_lesson.Rmd)
 
 
 ### Software installation<a name="software_installation"></a>
