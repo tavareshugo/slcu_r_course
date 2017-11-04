@@ -38,7 +38,8 @@ As an example dataset we will be using real data published by
 
 #### Module 1 
 
-[File organisation](file_organisation.md)
+[File organisation](../module01_data_and_files/file_organisation.md)
+
 [Data organisation](../module01_data_and_files/data_organisation.md)
 
 #### Module 2
@@ -72,5 +73,3 @@ packages (these are like "extensions" to add extra functionality to _R_):
 
 **If you have any problems please get in touch with one of the instructors 
 beforehand**
-
-
