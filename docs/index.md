@@ -1,22 +1,23 @@
-# Data analysis with R
-
 **Location:** Sainsbury Laboratory Cambridge University ([map](https://goo.gl/maps/cBHYGk9TkfK2))
 
 **Dates:**
 
 **Instructors:** 
-Sandra Cortijo (sandra.cortijo@slcu.cam.ac.uk), 
-Hugo Tavares (hugo.tavares@slcu.cam.ac.uk),
-Anna Gogleva (anna.gogleva@slcu.cam.ac.uk)
+[Sandra Cortijo](mailto:sandra.cortijo@slcu.cam.ac.uk), 
+[Hugo Tavares](mailto:hugo.tavares@slcu.cam.ac.uk),
+[Anna Gogleva](mailto:anna.gogleva@slcu.cam.ac.uk)
+
+**Requirements:** participants must bring a laptop with a few specific software 
+packages installed beforehand ([details below](#software_installation)). 
 
 
 ### Description
 
 This is a series of short and modular workshops where you will learn how to analyse 
 data using the statistical software _R_. 
-Each module will be 1h30-2h long and we will cover topics such as:
+Each module will be 1h30m - 2h long and we will cover topics such as:
 
-- How to effectively prepare your data to maximise the number of questions you 
+- How to prepare your data to maximise the number of questions you 
 can ask from it
 - How to visualise data
 - How to filter and summarise your data efficiently
@@ -33,7 +34,23 @@ As an example dataset we will be using real data published by
 [Burghardt .. Schmitt (2015)](https://doi.org/10.1111/nph.13799). 
 
 
-### Pre-requisites
+### Course Materials
+
+#### Module 1 
+
+[File organisation](../module01_data_and_files/data_organisation.md)
+[Data organisation](../module01_data_and_files/data_organisation.md)
+
+#### Module 2
+
+[Data visualisation](../module02_data_viz_ggplot/start_lesson.Rmd)
+
+#### Module 3
+
+[Data manipulation](../module03_advanced_data_manipulation_dplyr/next_lesson.Rmd)
+
+
+### Software installation<a name="software_installation"></a>
 
 You will need a laptop with the following software installed:
 
@@ -55,20 +72,5 @@ packages (these are like "extensions" to add extra functionality to _R_):
 
 **If you have any problems please get in touch with one of the instructors 
 beforehand**
-
-
-### Course Materials
-
-#### Module 1 
-
-<link to slides?>
-
-#### Module 2
-
-<link to slides>
-
-#### Module 3
-
-<link to slides>
 
 
