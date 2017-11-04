@@ -38,7 +38,7 @@ As an example dataset we will be using real data published by
 
 #### Module 1 
 
-[File organisation](../module01_data_and_files/data_organisation.md)
+[File organisation](file_organisation.md)
 [Data organisation](../module01_data_and_files/data_organisation.md)
 
 #### Module 2
