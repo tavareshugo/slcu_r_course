@@ -64,7 +64,7 @@ you:
 
 
 >### Exercise:
-
+> 
 >You are collecting data on how the expression of two target genes 
 changes in response to temperature in different accessions of Arabidopsis:
 >
