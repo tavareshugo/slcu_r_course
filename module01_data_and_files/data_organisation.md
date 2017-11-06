@@ -35,12 +35,11 @@ to input data in the computer. In this session, we're going to discuss:
 > A survey was done to determine the sex and weights of different animals 
 occurring in different experimental plots. The experiment was repeated in two years.
 >
-> - The data for this survey is in the file "dataset_messy.xls" located in the 
-"data" directory
+> - Open the file "dataset_messy.xls" located in the "course_data" directory
 > - Based on the principles outlined above, make a note of what data formatting 
 problems you find with this dataset
 >
-> Open discussion: what data-formating problems did you find? And how would you 
+> Open discussion: what data-formatting problems did you find? And how would you 
 solve them?
 
 
@@ -77,6 +76,83 @@ This can be done from any spreadsheet program by choosing "`Save As`" and then
 selecting the file format to be "_CSV_".
 
 This is the recommended way to export data ready to be imported into _R_.
+
+>### Exercise:
+>
+>- Open the file "dataset_tidy.xls" in the "course_data" directory
+>- Examine the file to see if you can understand its contents
+>- Export the cleaned-up data as a `CSV` file (save it in the "course_data" 
+directory)
+
+
+## Reading data into R
+
+_R_ is a statistical software and programming language. 
+This means that, in order to do anything in _R_, we need to literally write down 
+instructions using specific code. 
+
+And so, to read files in _R_ we need to learn how to tell the program where 
+our file is... without using the file browser!
+
+This is done by specifying the **path** to that file. This is like an address of 
+where that file is located on the computer.
+
+File paths are built like so:
+
+`directory/subdirectory/another_subdirectory/some_file.txt`
+
+* Each directory is split by a `/` 
+* The file name comes at the end (don't forget to include the file extension!)
+* Spaces should be avoided, but in R they are tolerated
+
+But what is the starting point of this *path*? 
+
+This varies between operating system, but generally a good way to start is to look 
+at the **working directory** that _R_ is using. This is the *path* that _R_ is
+taking as its reference point while you are working. 
+
+
+>### Exercise:
+>
+> - Open RStudio
+> - Run this command in _R_ to find what your default _working directory_ is: `getwd()`
+> - Try changing your working directory using the command `setwd("new/working/dir")`
+>   - Tip: write down this code `setwd("")` and while your cursor is inside the 
+quotes press the tab `Tab` key.
+
+
+
+**Tips:** 
+
+- When writting paths in R always use `"` quotes
+- Try pressing the `Tab` key when writing paths - _RStudio_ will auto-complete 
+the path for you
+- If you start your path with the `~` symbol, this means "your home directory", 
+which will vary depending on your username and operating system
+- paths can be _relative_ to where your working directory is at the moment
+    - Use `../` to symbolise the directory _above_ your current directory
+
+
+>### Exercise:
+> 
+> Throughout the course we will be using Rstudio, which is a program that provides 
+with a convenient interface to work with R. 
+>
+> R code can be saved into text documents, called scripts (usually with a file 
+extension `.R`). In this course we will be using a special kind of document, 
+which is also text-based but mixes code and text. These are called "R Markdown" 
+files (with extension `.Rmd`) and we will be using them throughout the course.
+>
+>- Open the file "reading_data.Rmd" in the "module01_data_and_files" course folder
+>- Try and complete the code following the instructions in that document
+
+
+## Homework
+
+Based on the principles outlined in this module, try and tidy one of your own
+datasets and then read it into R.
+
+If you encounter any difficulties, we will discuss them in the next module!
 
 
 ## Further reading
