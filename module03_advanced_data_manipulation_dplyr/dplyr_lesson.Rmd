@@ -3,8 +3,7 @@ title: "Module 03: Data manipulation with R"
 output: html_document
 ---
 
-In this module we are going to see how to manipulate, subset and modify tables 
-using `dplyr`, also part of the `tidyverse` package.
+In this module we are going to see how to manipulate, subset and modify tables using `dplyr`, which is also a part of the `tidyverse` package family.
 
 We will learn how to:
 
@@ -22,35 +21,48 @@ library(tidyverse)
 expt1 <- read_csv("../course_data/burghardt_et_al_2015_expt1.csv")
 ```
 
+### Selecting columns with `select()`
 
-# Selecting columns with `select()`
+To get an idea of data contents we will first check number of dimentsions with ``dim()`` and look at the column names with ``names()``.
+
+```{r}
+dim(expt1)
+names(expt1)
+```
+
+This is quite a large dataset, we don't want to look at it all at once. Say, we are interested in just 2 columns for now: `genotype` and `temperature`. To select the columns we will use ``select()``, ironically.
 
 ```{r}
 expt1.genot.temp <- select(expt1, genotype, temperature)
-head(expt1.genot.temp)
+expt1.genot.temp
 ```
 
-Let's say we wanted to select the column `genotype` and any column that contains 
-the word "bolt" in its name. `select()` allows you to do this:
+This was easy. Let's say we wanted to select the column `genotype` and any column that contains the word "bolt" in its name. `select()` allows you to do this:
 
 ```{r}
-expt1.bolt <- select(expt1,genotype, contains("bolt"))
-head(expt1.bolt)
+expt1.bolt <- select(expt1, genotype, contains("bolt"))
+expt1.bolt
 ```
 
+> **Challenge**: can you select all the columns that contain values measured in mm?
 
-# Filter rows according to certain conditions with `filter()`
+### Filter rows according to certain conditions with `filter()`
 
-Let's say that we wanted to retain only the rows of our table were plants were 
-vernalized. This is a job for the `filter()` function:
+Let's say that we wanted to retain only the rows of our table with data on vernalized plants. This is a job for the `filter()` function.
+Before the filetering we need to have a look at the possible values in the `vernalization` column, there are only 2 possibilities: 'V' and 'NV'.
+
+```{r}
+unique(expt1$vernalization)
+```
+Since we are intereseted in veranlized plants only, so will be selected only 
+"V"s:
 
 ```{r}
 expt1.vernalised <- filter(expt1, vernalization == "V")
-head(expt1.vernalised)
+expt1.vernalised
 ```
 
-
-In order to set the filtering conditions, several operators can be used:
+To set the filtering conditions, several operators can be used:
 
 - `<` less than 
 - `<=` less than or equal to
@@ -59,8 +71,7 @@ In order to set the filtering conditions, several operators can be used:
 - `==` equal to
 - `!=` not equal to
 
-It is also possible to combine several conditions together using the following 
-operators:
+It is also possible to combine several conditions together using the following operators:
 
 - `&` for AND
 - `|` for OR
@@ -74,24 +85,22 @@ For example, if we want to select individuals that were vernalized and grown
 under fluctuating temperature conditions, we could do:
 
 ```{r}
-expt1.vernalised.fluctuating <- filter(expt1, vernalization=="V" & fluctuation=="Var")
+expt1.vernalised.fluctuating <- filter(expt1, vernalization == "V" & fluctuation == "Var")
 ```
 
-Another example, if we wanted to select individuals grown with 8h day light or 
-that were late flowering:
+Another example, if we wanted to select individuals grown with 8h day light or that were late flowering:
 
 ```{r}
-expt1.SD.or.late <- filter(expt1, day.length=="8" | days.to.bolt>85)
+expt1.SD.or.late <- filter(expt1, day.length == "8" | days.to.bolt > 85)
 ```
 
+> **Exercise**
+> Can you filter the data to keep the following?
 
-** Exercise **
-Can you filter the data to keep the following?
-
-1. Samples that are not in the the Ler background and that have been 
-treated with fluctuating temperature.
-2. Samples that are bolting at less than 57 days of flowing with less than 40 leaves
-3. Samples of genotypes _fca-6_ for which `blade.ratio` is not missing
+> 1. Samples that are **not in the the Ler background** and that have been 
+> treated with **fluctuating temperature**.
+> 2. Samples that are bolting at less than **57 days** of flowing with **less than > 40 leaves**
+> 3. Samples of genotypes `fca-6` for which `blade.ratio` is not missing
 
 
 ```{r}
@@ -99,29 +108,31 @@ treated with fluctuating temperature.
 
 ```
 
+### Modify or add new columns with `mutate()`
 
-# Modify or add new columns with `mutate()`
-
-This is a useful function to add new variables (i.e. new columns) to the table, 
-or to modify existing ones.
+This is a useful function to add new variables (i.e. new columns) to the table, or to modify existing ones. 
+Say, we want to add a new column, `blade.length.cm` which will contain blade length measeured in cm. We can construct this column by modifying the already
+existing ``blade.length.mm`` column.
 
 ```{r}
+dim(expt1)
 expt1.cm <- mutate(expt1, blade.length.cm = blade.length.mm/10)
+dim(expt1.cm)
 ```
 
-We can also modify/create more than one variable, separating them by `,`:
+We can also modify/create more than one variable at a time, separating them by `,`:
 
 ```{r}
-expt1.cm <- mutate(expt1, blade.length.cm = blade.length.mm/10 , total.leaf.length.cm = total.leaf.length.mm/10)
+expt1.cm <- mutate(expt1, blade.length.cm = blade.length.mm/10,
+                   total.leaf.length.cm = total.leaf.length.mm/10)
 ```
 
-Be careful! If we use the name of an existing variable, it will modify it instead.
+<span style="color:red">**Be careful!**</span> If we use the name of an existing variable, it will modify it instead.
 
-
-# Chain commands with `%>%` pipes 
+### Chain commands with `%>%` pipes 
 
 It allows to perform a sequence of multiple operations, without a need for 
-intermediate files (or very complicated nested command lines)
+intermediate files (or very complicated nested command lines).
 
 Now let’s say that we wanted to do several manipulations in our data.frame:
 
@@ -132,11 +143,15 @@ Now let’s say that we wanted to do several manipulations in our data.frame:
 Based on what we’ve learned so far, we could for example do the following:
 
 ```{r}
-expt1.filtered <- mutate(expt1, total.leaf.length.cm = total.leaf.length.mm/10)
+expt1.filtered <- mutate(expt1, 
+                         total.leaf.length.cm = total.leaf.length.mm/10)
 
-expt1.filtered <- filter(expt1.filtered, vernalization=="V")
+expt1.filtered <- filter(expt1.filtered,
+                         vernalization == "V")
 
-expt1.filtered <- select (expt1.filtered, genotype, total.leaf.length.cm )
+expt1.filtered <- select (expt1.filtered,
+                          genotype,
+                          total.leaf.length.cm )
 ```
 
 `dplyr` allows us to “chain” several commands using a special “pipe” function `%>%`. 
@@ -145,19 +160,16 @@ This is how the above code could have been written using this trick:
 ```{r}
 expt1 %>% 
   mutate(total.leaf.length.cm = total.leaf.length.mm/10) %>% 
-  filter(vernalization=="V") %>% 
+  filter(vernalization == "V") %>% 
   select(genotype, total.leaf.length.cm)
 ```
 
-** Exercise:**
+> **Exercise:**
+> Use `%>%` to do the following on expt1:
 
-Use `%>%` to do the following on expt1:
-
-- Keep samples that are not in the the Ler background and that have been treated 
-with fluctuating temperature.
-- Transform the blade length in cm
-- Keep only the columns containing information about the genotype, blade length 
-(in cm) and bolting information (hint, use `contains`)
+> - Keep samples that are not in the the Ler background and that have been treated with fluctuating temperature.
+> - Transform the blade length in cm
+> - Keep only the columns containing information about the genotype, blade length (in cm) and bolting information (hint, use `contains`)
 
 ```{r}
 # Enter your code here
@@ -165,70 +177,64 @@ with fluctuating temperature.
 ```
 
 
-# Combine all the above with graphs
+### Combine all the above with graphs
 
-We can pipe data manipulation with `ggplot` in order to produce graphs for a 
-subset of the data.
-
+We can pipe data manipulation with `ggplot` to produce graphs for a subset of the data.
 Let's say we want to make a boxplot of the flowering time in function if the 
-temperature fluctuation (like in last session), however only for the vernalised 
-samples. For this, we can use the following code: 
+temperature fluctuation (like in last session), however only for the vernalised samples. For this, we can use the following code: 
 
 ```{r}
 expt1 %>% 
-  filter(vernalization=="V") %>% 
+  filter(vernalization == "V") %>% 
   ggplot(aes(fluctuation, days.to.flower)) + 
   geom_boxplot()
 ```
 
-
-** Exercise**
-
-Can you make a violin plot of the days to flower for the different genotypes that 
-have been growing in short days? 
-
+> **Exercise**
+> Can you make a violin plot of the days to flower for the different genotypes that have been growing in short days? 
 
 ```{r}
 # Enter your code here
 
 ```
 
-
-# Summarise data with `group_by` and `summarise`
+### Summarise data with `group_by` and `summarise`
 
 Sometimes we might want to summarise our data in a smaller table. 
-This kind of operation can be achieved by combining two `dplyr` functions together: 
+This kind of operation can be achieved by combining two `dplyr` functions: 
 `group_by()` and `summarise()`.
 
-For example, we can summarise the mean flowering time for each genotype by typing:
+For example, we can summarise the mean flowering time for each genotype:
 
 ```{r}
 expt1 %>% 
   group_by(genotype) %>% 
-  summarise(mean.days.to.flower = mean(days.to.flower, na.rm=TRUE))
+  summarise(mean.days.to.flower = mean(days.to.flower, na.rm = TRUE))
 ```
 
 
-# Saving data to a file
+### Saving data to a file
 
-Once we have modified our data we might want to save it to come back to it later. 
-For this we can use the function `write_csv()`
+Once we have modified our data we might want to save it to come back to it later. For this we can use the function `write_csv()`
 
-Let’s say that we were to remove all the missing data from our data to share it 
-with a collaborator (or later use in R ourselves):
+Let’s say that we were to remove all the missing data from our data to share it with a collaborator (or later use in R ourselves):
 
 ```{r}
 expt1.blade.ratio.clean <- expt1 %>% 
   filter(!is.na(blade.ratio))
 
-write_csv(expt1.blade.ratio.clean, path = "data/x_blade_ratio_clean.csv")
+write_csv(expt1.blade.ratio.clean, path = "x_blade_ratio_clean.csv")
 ```
 
-
-# Some key points to remember
+### Some key points to remember
 
 - `dplyr` has several useful functions to manipulate tables
 - `dplyr` functions can be “chained” together using the `%>%` pipe
 - We can save tables to text-based files using the `write_*` family of functions
+
+### Futher reading and additional resources:
+
+- [dplyr cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+- [data transformation chapter from 'R for Data Science'](http://r4ds.had.co.nz/transform.html)
 
 
