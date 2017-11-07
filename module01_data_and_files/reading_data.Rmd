@@ -68,9 +68,7 @@ surveys <- read_csv("<here>")
 ```
 
 _Note:_ there is another function called `read.csv()`, which is the usual 
-default function to read CSV files. It is very similar to `read_csv()`, but 
-with a few differences: it is faster at reading files (relevant for big 
-datasets); it returns a "tibble" object, which is an "enhanced" form of a 
-data.frame; strings are not converted to factors by default. The meaning of this 
-will become clearer as we move through the course.
+default function to read CSV files, and is very similar to `read_csv()`. 
+During the workshops we will use `read_csv()` as it is more convenient.
+
 

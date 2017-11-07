@@ -118,7 +118,7 @@ taking as its reference point while you are working.
 > - Run this command in _R_ to find what your default _working directory_ is: `getwd()`
 > - Try changing your working directory using the command `setwd("new/working/dir")`
 >   - Tip: write down this code `setwd("")` and while your cursor is inside the 
-quotes press the tab `Tab` key.
+quotes press the `Tab` key.
 
 
 
