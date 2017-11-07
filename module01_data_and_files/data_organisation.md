@@ -146,6 +146,9 @@ files (with extension `.Rmd`) and we will be using them throughout the course.
 >- Open the file "reading_data.Rmd" in the "module01_data_and_files" course folder
 >- Try and complete the code following the instructions in that document
 
+During this exercise, we use `read_csv()` in order to read in R data thate are in a `.csv` format.
+You can find more information about other functions that can be used to read other file formats in R [here] (https://github.com/tidyverse/readr).
+
 
 ## Homework
 
