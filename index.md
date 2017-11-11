@@ -44,7 +44,7 @@ As an example dataset we will be using real data published by
 
 #### Module 2
 
-[Data visualisation](module02_data_viz_ggplot/start_lesson.html)
+[Data visualisation](module02_data_viz_ggplot/ggplot_lesson.html)
 
 #### Module 3
 
