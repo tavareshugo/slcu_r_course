@@ -1,129 +1,194 @@
 ---
-title: "Data Exploration with R"
+title: "Data Visualization with R"
 output: html_document
 ---
-In this lesson we will learn how to explore tabular data, perform basic sanity checks and do beautiful visualizations with [``ggplot2``](http://ggplot2.org/).
 
-## Prerequsites 
+In this lesson we will learn how to explore tabular data, perform basic sanity 
+checks and do visualizations with [``ggplot2``](http://ggplot2.org/).
 
-First we will install some R packages containing functions we need. This can be done with ``install.packages()`` function.
 
-```{r install packages, eval = FALSE}
-install.packages("visdat")
-install.packages("tidyverse")
-install.packages("plotly")
-install.packages("ggplot2")
+## Setting things up
+
+In this lesson we are going to use some R packages containing functions we need:
+
+- `tidyverse` which contains a collection of several packages for data manipulation 
+and visualization (including the `ggplot2` package)
+- `visdat` to give you a quick and visual representation of your data
+- `plotly` to produce interactive graphics
+
+You can install packages by using the ``install.packages()`` function. 
+For example, if you wanted to install the `plotly` package you would 
+do:
+
 ```
-Once the packages are installed, we can load them in the current R session with ``library()`` function. 
+install.packages("plotly")
+```
 
-```{r load packages, eval = TRUE, echo = FALSE}
+Once the packages are installed, we can load them in the current R session 
+with the ``library()`` function: 
+
+```{r load packages, eval = TRUE, message = FALSE}
 library(tidyverse)
 library(visdat)
 library(plotly)
-library(ggplot2)
 ```
 
-Now our work space is ready, the only thing missing - is the actual data set that we want to explore and visualize. For this lesson we will use a slightly simplified version of a data set published by [Burghard et al 2015](http://datadryad.org/resource/doi:10.5061/dryad.65d76). 
+Now our work space is ready. 
+The only thing missing is the actual data set that we want to explore and visualize! 
+
+For this lesson we will use a slightly simplified version of a dataset published 
+by [Burghard et al 2015](http://datadryad.org/resource/doi:10.5061/dryad.65d76). 
+
 
 ## Read the data
 
-The simplified version of the data set can be found in the ``course_data`` folder (`burghardt_et_al_2015_expt1.csv`). Run the command below to read the data. We will store it in a variable called ``x``. 
+The simplified version of the data set can be found in the ``course_data`` folder 
+(`burghardt_et_al_2015_expt1.csv`). 
+
+Run the command below to read the data and store it in a variable called ``expt1`` 
+(referring to "experiment 1" of the published dataset):
 
 ```{r read data}
-x <- read.csv("../course_data/burghardt_et_al_2015_expt1.csv") %>%  as.tibble()
+expt1 <- read_csv("../course_data/burghardt_et_al_2015_expt1.csv")
 ```
+
+You will notice the `read_csv()` function gives you a message referring to 
+a "column specification". This is referring to what type of data it thinks 
+each of your columns contains. 
+
+In this case, some columns contain "character"-type data (i.e. text) and others 
+contain "numeric"-type data (which can be "integer" if they have no decimal 
+points, or "double" if they do).
+
 
 ## Look at the data
 
-To get a glimpse of the data, we can just type in the console the name of the variable we have stored it in (`x`).
+To get a glimpse of the data, we can type the name of the variable we have stored 
+it in (`expt1`).
 
-```{r head x}
-x
+```{r head expt1}
+expt1
 ```
-This will show you first 10 lines and 6 columns of the data. 
 
-\newline 
+This shows you the first 10 lines the data and only a few columns that fit 
+on the screen.
 
 > **Challenge:** How many rows and columns does our data set contain?
 
 There are other ways to visually inspect your data:
 
-- with ``View()`` function you can have access to an interactive table, where you can sort, filter and search your data set with keywords.
+- with the ``View()`` function you can have access to an interactive table, 
+where you can sort, filter and search your data set with keywords (this does 
+not modify your original variable):
 
 ```{r View, eval = FALSE}
-View(x)
+View(expt1)
 ```
-- with ``str()`` function you can get access to a structure of you data sets.
+
+- with the ``glimpse()`` function you can get access to the structure of your data:
 
 ```{r str}
-str(x)
+glimpse(expt1)
 ```
-> **Challenge** what types of variables do we have in our data set? what could they mean?  What type of variable is "bolt"? How about "temperature"?
+
+> **Challenge** what types of variables do we have in our data set? 
+What could they mean?  What type of variable is "bolt"? How about "temperature"?
 
 - ``dim()`` returns basic dimensions of your data set, i.e. numbers of rows and columns.
+
 ```{r dim}
-dim(x)
+dim(expt1)
 ```
 
-- finally, for numeric variables it is convenient to use ``summary()`` function, which generates basic stats for each numeric column.
+- finally, for numeric variables it is convenient to use ``summary()`` function, 
+which generates basic stats for each numeric column.
 
 ```{r summary}
-summary(x)
+summary(expt1)
 ```
 
 So far, we have already used a handful of R functions, though we have just barely started:
 
 - ``install.packages()``
 - ``library()``
-- ``read.csv()``
+- ``read_csv()``
 - ``View()``
-- ``str()``
+- ``glimpse()``
 - ``summary()``
 - ``dim()``
 
-Of course, it is difficult to memorize all the function names, what they are doing and how you should use them. Luckily, R has very convenient built-in help. To use it, type name of a function or any other object you are interested it preceded by `?`
+Of course, it is difficult to memorize all the function names, what they are 
+doing and how you should use them. 
+Luckily, R has very convenient built-in help. 
+To use it, type name of a function or any other object you are interested it 
+preceded by `?`
 
 ```{r get help}
 ?summary
 ```
 
-R help might seem cryptic at first, but you will get used to it, you can always scroll down to the 'examples' section and try running some of them yourself to get an idea of what the function in question is capable of.
+R help might seem cryptic at first, but you will get used to it, you can always 
+scroll down to the 'examples' section and try running some of them yourself 
+to get an idea of what the function in question is capable of.
 
-> **Challenge** what does ``round()`` function do? 
+Also, a web-search is also just as effective (if not more!) as looking at the 
+help pages.
 
-> **Challenge** can you specifically look at the end of your data set instead of it's beginning? How would you do it in R? (hint: ``?tail``)
+> **Challenge** what does the ``round()`` function do? 
+
+> **Challenge** can you specifically look at the end of your data instead 
+of its beginning? How would you do it in R? (hint: ``?tail``)
+
 
 ## Visual representation of your data
 
-To get a bird-eye view at the data, to identify its structure and potential problems we can simply plot it in Rothko style using ``vis_dat()`` function.
+To get a "birds-eye" view at the data, to identify its structure and potential 
+problems we can simply plot it in 
+[Rothko](https://en.wikipedia.org/wiki/Mark_Rothko)-style using the ``vis_dat()`` 
+function.
 
 ```{r}
-vis_dat(x)
+vis_dat(expt1)
 ```
 
-> **Challenge** what is the most common data type in our data set ? Can you spot any potential problems?
+> **Challenge** what is the most common data type in our data set ? 
+Can you spot any potential problems?
+
 
 ### Missing values
 
-You might have noticed that some of the cells are plotted in gray - these indicate missing values. Missing values can occur in a data set when a certain observation was not collected and cause potential problems in the downstream analysis if we are not careful. There are a couple of strategies how to deal with missing values:
+You might have noticed that some of the cells are plotted in gray - these indicate 
+missing values. Missing values can occur in a data set when a certain observation 
+was not collected and cause potential problems in the downstream analysis if we 
+are not careful. There are a couple of strategies on how to deal with missing values:
 
-- remove rows with missing values completely (the safest option, though can result in substantial data loss);
+- remove rows with missing values completely (the safest option, though can result 
+in substantial data loss);
 - ignore missing values when you can (can you?);
 - impute value based on surrounding values (the most risky).
 
-To stay on the safe side now, we will simply remove all the rows with missing values from our beloved `x` data set.
+To stay on the safe side now, we will simply remove all the rows with missing 
+values from our beloved `expt1` data set.
 
 ```{r drop missing}
-x <- x %>% drop_na()
+expt1 <- drop_na(expt1)
 ```
 
-> **Challenge** How many rows are left in the data set after we have dropped missing values? 
+> **Challenge** How many rows are left in the data set after we have dropped 
+missing values? 
 
 
 ## Plots! Plots! Plots!
 
-Now, once we have learned some basics of our data set, we will go straightly to plotting to get even more insights. We will use plotting 
-grammars from ggpplot2 package. Plotting grammars might sound scary, but just think about them as simple building blocks of a plot. By combining and layering several blocks we can create our dream plot for a dream paper or just a lab meeting.
+Now that we have learned some basics of our data set, we will go straight to 
+plotting to get even more insights. 
+
+For this we will be using the `ggplot2` package, which follows a general scheme 
+termed "grammar or graphics".
+"Grammar of graphics" might sound scary, but just think about them as simple 
+building blocks of a plot. 
+By combining and layering several blocks we can create our dream plot for a 
+dream paper or for a lab meeting.
 
 To build a graph we need several blocks:
 
@@ -137,71 +202,305 @@ To build a graph we need several blocks:
 
 Let's focus on the first three: data, aesthetics and geometric object. 
 
-- **data** - well, this is obvious, we need some data;
-- **geom_objects** - this is the most crucial part, actual objects that we put on a plot. A plot must have at least one `geom_object`. Examples include:
+- **data** - well, this is obvious, we need some data
+- **geom_objects** - actual objects that we put on a plot. A plot must have at 
+least one `geom_object`. Examples include:
     - points (`geom_point` for scatter plots, dot plots)
     - lines (`geom_line` for trend lines, time series)
-- **aesthetics** - ~ something we can see, e.g: position, colour, shape, line type, size. Aesthetics can be set with `aes()` function. Note, different ``geom_`` objects can understand only a subset of aesthetics. For details, check help. (``?geom_line``)    
+- **aesthetics** - things you can see and that depend on the data. For example, 
+the position (x and y), colour, shape, line type, size, etc... 
+Aesthetics can be set with `aes()` function. Note, different ``geom_`` 
+objects can understand only a subset of aesthetics. For details, check their 
+respective help (e.g. ``?geom_line``)    
 
-Everyone, except excel, likes box plots, so we will start by plotting `days. to.flower` variable measured for different genotypes. ``ggplot()`` initializes a plot, we also give it our `x` data set and specify aesthetics that should be common for the whole plot, in our case - names for x and y axis.
+
+### Building a graph with ggplot2
+
+Everyone (except Excel) likes boxplots, so we will start by plotting `days.to.flower` 
+variable measured for different genotypes. 
+
+The `ggplot()` function initialises a plot. And the very minimum it needs 
+a dataset to plot:
 
 ```{r}
-ggplot(x, aes(genotype, days.to.flower))
+ggplot(expt1)
+```
 
+But this simply produces a blank (well, grey) canvas! 
+
+We haven't told `ggplot` what _aesthetics_ (this is `ggplot2` terminology) we 
+want it to map onto this blank canvas. 
+For a boxplot we need to tell it what our _x_ and _y_ variables are.
+
+```{r}
+ggplot(expt1, aes(x = genotype, y = days.to.flower))
 ```
  
-Next, we can layer ``geom_object`` on top of the created canvas by just adding ``geom_boxplot()``. 
+As you can see, `ggplot` "mapped" the values in the `genotype` and `days.to.flower` 
+variables of our table to the _x_ and _y_ aesthetics of the plot. 
+
+But this is still quite an empty plot, because we haven't told `ggplot` what 
+_geometries_ we want it to draw in the canvas. In our case, we want a boxplot, 
+which we can add on top of the created canvas by adding (literally `+`) 
+a ``geom_boxplot()``:
 
 ```{r}
-ggplot(x, aes(genotype, days.to.flower)) +
-    geom_boxplot()
+ggplot(expt1, aes(genotype, days.to.flower)) +
+  geom_boxplot()
 ```
 
 > **Exercise:** can you make a violin plot instead? (hint: ``?geom_violin``)
 
 ```{r}
-ggplot(x, aes(genotype, days.to.flower)) +
-  geom_violin()
+# Put your code here!
 ```
 
-Let's be honest, the plot looks pretty ugly. We want to add some colour. Colour sound like it should belong to aesthetics, so we put it inside ``aes()`` function. Note, you usually don't need to worry about colours, ``ggplot`` does it for you by sampling from its default colour palettes.
-In this case we want different genotypes to be coloured differently.
 
+### Adding multiple layers
+
+Let's now layer a couple of ``geom_objects`` on the same plot. 
+Say, we want to have points for the individual values together with our boxplots:
 
 ```{r}
-ggplot(x, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) + geom_point()
+ggplot(expt1, aes(genotype, rosette.leaf.num)) +
+  geom_jitter() +
+  geom_boxplot()
 ```
 
-Pretty! Let's now layer a couple of ``geom_objects`` on the same plot. Say, we want to have points for actual values overlayed with box plots:
+>**Challenge:** can you modify this plot so that the points appear on top of the 
+boxplots rather than behind them?
 
 ```{r}
-ggplot(x, aes(genotype, rosette.leaf.num, colour = genotype)) +
-    geom_jitter() +
-  geom_boxplot(alpha = 0.2)
+# Put your code here!
 ```
 
-Note, in this case we have supplied ``geom_boxplot`` with additional aesthetics parameter `alpha`, and only boxes got affected, not the whole plot. This is an example how you could control specific aesthetics of individual `geom_objects`.
 
-Now, let's assume we are particularly interested in the relationship between number of rosette leafs and blade length in mm per genotype. To visualize the relationship we generate a scatter plot.
+### Colours!
 
-```{r complex plot}
-ggplot(x, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
-    geom_point()
+We can also modify the appearance of our geometry, for example it's colour:
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.flower)) +
+  geom_boxplot(colour = "red")
 ```
 
-It is pretty, though messy. What if we wanted to isolate each genotype in individual plots? It is easy with ggplot2, we need another layer in our plot, `facet`, which tells R to plot genotypes separetely and arrange them in a ribbon, side by side.
+Or perhaps the colour that _fills_ the boxplots:
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.flower)) +
+  geom_boxplot(colour = "red", fill = "royalblue")
+```
+
+Or even its transparency:
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.flower)) +
+  geom_boxplot(colour = "red", fill = "royalblue", alpha = 0.5)
+```
+
+This is all very colourful, but rather gratuitous (what is this colour telling 
+us about the data?!). 
+
+What if we wanted to colour our boxplots according to which fluctuation 
+treatment the plants were exposed to? In `ggplot2` language, we want to "map" 
+the values of `fluctuation` onto the colour _aesthetic_ of our plot. 
+This should therefore go inside the `aes()` part of our graph:
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.flower, colour = fluctuation)) +
+  geom_boxplot()
+```
+
+Wow! Can you see what ggplot did for you!? It automatically split the data of 
+each genotype into two groups and coloured them accordingly. 
+
+Now, let's say we wanted to visualise the individual data points (not coloured) 
+behind our boxplots (coloured by fluctuation):
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.flower, colour = fluctuation)) +
+  geom_jitter() +
+  geom_boxplot(alpha = 0.5)
+```
+
+As it is, the `colour` aesthetic is mapped to _all_ geometries of the graph. This 
+is because we defined it within the `ggplot()` function, which affects every 
+`geom_object` that comes afterwards. 
+
+But we can also define aesthetics inside each geometry, for example:
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.flower)) +
+  geom_jitter() +
+  geom_boxplot(aes(fill = fluctuation), alpha = 0.5)
+```
+
+>**Challenge:** say we are particularly interested in the relationship between 
+number of rosette leafs and blade length in mm per genotype. 
+>
+> Visualize this relationship with a scatter plot (`geom_point()`)
+between `blade.length.mm` and `rosette.leaf.num` and colour the points by 
+`genotype`. 
+>
+> What happens if you colour the points by `days.to.bolt`?
+
+```{r}
+# Put your code here!
+```
+
+
+### Facetting
+
+Often, our data has several grouping variables, and colours alone are not enough 
+to fully represent the differences in the dataset. 
+
+For example, the scatterplot produced in the previous exercise is pretty, but 
+very crowded. What if we wanted to isolate each genotype in individual plots? 
+
+This easy to accomplish with `ggplot2` by adding a "facet" layer to our plot. 
+There are two types of facets:
+
+- `facet_wrap()` - arranges sub-plots in a ribbon that "wraps" around 
+after a fixed number of plots
+- `facet_grid()` - arranges sub-plots in rows and/or columns
+
+Let's start with `facet_wrap()` and see it in action:
 
 ```{r decomposed plot}
-ggplot(x, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
     geom_point() +
-    facet_wrap(~genotype)
+    facet_wrap( ~ genotype)
 ```
 
-So much better. But even this is not the limit. We can easily turn our plot in interactive mode, by just wrapping in a special  ``ggplotly()`` function.
+>**Challenge:** In the previous graph, colouring the genotype is redundant with 
+the facetting. Can you think of a more useful way to colour the points?
+
+```{r}
+# Put your code in here!
+```
+
+Now let's see how the same code works with `facet_grid()`:
+
+```{r}
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
+    geom_point() +
+    facet_grid(. ~ genotype)
+```
+
+In this case, our facets are arranged in individual columns. We can arrange them 
+in rows like so:
+
+```{r}
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
+    geom_point() +
+    facet_grid(genotype ~ .)
+```
+
+>**Challenge:** Can you modify the previous graph to facet the data by the 
+`fluctuation` treatment (as rows) and `day.length` (as columns) and colour the 
+points by genotype.
+
+```{r}
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
+    geom_point() +
+    facet_grid(day.length ~ fluctuation)
+```
+
+In conclusion, **by effectively combining facets, colours and other aesthetics 
+you can represent many dimensions of your data in a single graph!**
+
+
+>**Challenge**: Can you produce a graph similar to 
+![Fig. 2B-C of Burghard et al 2015](http://onlinelibrary.wiley.com/store/10.1111/nph.13799/asset/image_n/nph13799-fig-0002.png?v=1&t=j9vceh13&s=ab8a38f8975413c52f62d9d4ebac20b239bfed4d). **Hint**: facet 
+the plot by `day.length` and `temperature` and fill the boxplots by `fluctuation`.
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.bolt)) + 
+  geom_boxplot(aes(fill = fluctuation)) +
+  facet_grid(day.length ~ temperature)
+```
+
+
+### Interactivity!
+
+But even this is not the limit. We can easily turn our plots into 
+interactive ones using the `plotly` package. 
+
+First we store our plot in a variable and then pass it to the special `ggplotly()`
+function.
+
 
 ```{r go interactive}
-p1 <- ggplot(x, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) + 
+# Store plot in a variable called p1
+p1 <- ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = fluctuation)) + 
   geom_point() +
   facet_wrap(~genotype)
 plotly::ggplotly(p1)
 ```
+
+
+## Themes
+
+Every element of a ggplot is modifiable. This is out of the scope for this 
+module, but here's a few examples and references.
+
+Themes modify the overall appearance of the plot. Some come with `ggplot2` and 
+many others can be obtained from other packages such as
+[`ggthemes`](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html) 
+(which also has some additional geom objects).
+
+```{r}
+# Example of built-in ggplot2 themes
+ggplot(expt1, aes(genotype, days.to.flower)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(title = "Black and white theme")
+
+ggplot(expt1, aes(genotype, days.to.flower)) +
+  geom_boxplot() +
+  theme_classic() +
+  labs(title = "Classic theme")
+
+ggplot(expt1, aes(genotype, days.to.flower)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Minimal theme")
+```
+
+
+The `theme()` function is used to modify individual elements of the plot. 
+The possibilities are so vast that the easiest way is to do a web-search for 
+your intended purpose. 
+
+For example, a web-search for "vertical labels x axis ggplot2" returns as one of 
+the first hits [this solution](https://stackoverflow.com/questions/1330989/rotating-and-spacing-axis-labels-in-ggplot2): 
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.flower)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+Or searching for "altering plot colours ggplot2" returns 
+[this page](http://www.sthda.com/english/wiki/ggplot2-colors-how-to-change-colors-automatically-and-manually), 
+which somewhere gives an interesting solution:
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.flower, fill = fluctuation)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette="Dark2")
+```
+
+
+## Extras
+
+Some other packages that add functionality to `ggplot2`:
+
+- [`gridExtra`](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html) 
+to combine several plots together
+- [`ggthemes`](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html) 
+to add extra themes and geometries
+- [`ggridges`](https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html) 
+to produce "ridge" plots (also known as "joyplots")
+- [`GGally`](https://ggobi.github.io/ggally/) for automatically plotting 
+relationships between data
