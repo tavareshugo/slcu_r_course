@@ -213,13 +213,14 @@ Aesthetics can be set with `aes()` function. Note, different ``geom_``
 objects can understand only a subset of aesthetics. For details, check their 
 respective help (e.g. ``?geom_line``)    
 
+You can find more imformation about how to build graphs with `ggplot2` in [this very useful document](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 
 ### Building a graph with ggplot2
 
 Everyone (except Excel) likes boxplots, so we will start by plotting `days.to.flower` 
 variable measured for different genotypes. 
 
-The `ggplot()` function initialises a plot. And the very minimum it needs 
+The `ggplot()` function initialises a plot. At the very minimum it needs 
 a dataset to plot:
 
 ```{r}
@@ -401,9 +402,7 @@ ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
 points by genotype.
 
 ```{r}
-ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
-    geom_point() +
-    facet_grid(day.length ~ fluctuation)
+# Put your code in here!
 ```
 
 In conclusion, **by effectively combining facets, colours and other aesthetics 
@@ -411,13 +410,12 @@ you can represent many dimensions of your data in a single graph!**
 
 
 >**Challenge**: Can you produce a graph similar to 
-![Fig. 2B-C of Burghard et al 2015](http://onlinelibrary.wiley.com/store/10.1111/nph.13799/asset/image_n/nph13799-fig-0002.png?v=1&t=j9vceh13&s=ab8a38f8975413c52f62d9d4ebac20b239bfed4d). **Hint**: facet 
-the plot by `day.length` and `temperature` and fill the boxplots by `fluctuation`.
+![Fig. 2B-C of Burghard et al 2015](../course_data/Burghard_fig2BC.png). 
+
+**Hint**: facet the plot by `day.length` and `temperature` and fill the boxplots by `fluctuation`.
 
 ```{r}
-ggplot(expt1, aes(genotype, days.to.bolt)) + 
-  geom_boxplot(aes(fill = fluctuation)) +
-  facet_grid(day.length ~ temperature)
+# Put your code in here!
 ```
 
 
@@ -491,6 +489,11 @@ ggplot(expt1, aes(genotype, days.to.flower, fill = fluctuation)) +
   scale_fill_brewer(palette="Dark2")
 ```
 
+## Homework
+
+Based on the principles outlined in this module, try and build a graph of your own dataset using `ggplot2`.
+
+If you encounter any difficulties, we will discuss them in the next module!
 
 ## Extras
 
@@ -504,3 +507,10 @@ to add extra themes and geometries
 to produce "ridge" plots (also known as "joyplots")
 - [`GGally`](https://ggobi.github.io/ggally/) for automatically plotting 
 relationships between data
+
+## Useful link
+
+- [Other cheat sheets!](https://www.rstudio.com/resources/cheatsheets/)
+
+
+
