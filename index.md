@@ -44,11 +44,11 @@ As an example dataset we will be using real data published by
 
 #### Module 2
 
-[Data visualisation](module02_data_viz_ggplot/ggplot_lesson.html)
+Data visualisation
 
 #### Module 3
 
-[Data manipulation](module03_advanced_data_manipulation_dplyr/next_lesson.Rmd)
+Data manipulation
 
 
 ### Software installation<a name="software_installation"></a>
