@@ -124,7 +124,7 @@ in the file name:
 ```
 2013-10-14_manuscriptFish.doc
 2013-10-30_manuscriptFish.doc
-2013-11-05_manusctiptFish_intitialRyanEdits.doc
+2013-11-05_manusctiptFish_initialRyanEdits.doc
 2013-11-10_manuscriptFish.doc
 2013-11-11_manuscriptFish.doc
 2013-11-15_manuscriptFish.doc
