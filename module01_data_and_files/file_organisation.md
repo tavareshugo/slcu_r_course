@@ -31,8 +31,8 @@ How to achieve this:
 
 - order the elements in a file name from general to specific
 - avoid special characters such as `* : \ / < > | " ? [ ] ; = + & £ $`
-- don't use spaces to separate elements in the file name; chose a convention and 
-stick to it:
+- **don't use spaces** to separate elements in the file name.
+- chose a convention and stick to it:
   - alllowercase: e.g. adjustcolor
   - period.separated: e.g. plot.new
   - underscore_separated: e.g. numeric_version
