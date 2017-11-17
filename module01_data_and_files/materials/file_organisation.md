@@ -8,7 +8,7 @@ Adapted and expanded from [here](http://rpubs.com/minebocek/user2017-ors)
 
 **File organisation and naming - effective weapons against chaos**
 
-![motivation](xkcd_documents.png)
+![](https://imgs.xkcd.com/comics/documents.png )
 
 ## How to name files
 
