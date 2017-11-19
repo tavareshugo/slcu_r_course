@@ -38,9 +38,9 @@ As an example dataset we will be using real data published by
 
 #### Module 1 
 
-[File organisation](module01_data_and_files/file_organisation.md)
+[File organisation](module01_data_and_files/materials/file_organisation.md)
 
-[Data organisation](module01_data_and_files/data_organisation.md)
+[Data organisation](module01_data_and_files/materials/data_organisation.md)
 
 #### Module 2
 
@@ -68,8 +68,20 @@ packages (these are like "extensions" to add extra functionality to _R_):
 1. Make sure you're connected to the internet
 2. Open RStudio
 3. In the top menu choose `Tools > Install Packages...`
-4. Type the following in the "Packages" box: `tidyverse,visdat`
+4. Type the following in the "Packages" box: `tidyverse,visdat,plotly`
 5. Click "Install" and the installation should happen automatically
 
-**If you have any problems please get in touch with one of the instructors 
-beforehand**
+Please confirm that the packages are properly installed by doing the following:
+
+1. Open RStudio
+2. In the "Console" panel (bottom left) type the following commands, one at a 
+time:
+    - `library(tidyverse)`
+    - `library(visdat)`
+    - `library(plotly)`
+3. The output should be similar to what is shown in the screenshot below. If 
+you get a message, such as: 
+"Error in library(tidyverse): there is no package called 'tidyverse'"
+**please get in touch with one of the instructors before the course**.
+
+![Screenshot of correct package installation](package_installation_instructions.png)
