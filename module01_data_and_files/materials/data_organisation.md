@@ -91,6 +91,8 @@ _R_ is a statistical software and programming language.
 This means that, in order to do anything in _R_, we need to literally write down 
 instructions using specific code. 
 
+([Short intro to RStudio](brief_r_intro.html))
+
 And so, to read files in _R_ we need to learn how to tell the program where 
 our file is... without using the file browser!
 
@@ -121,8 +123,7 @@ taking as its reference point while you are working.
 quotes press the `Tab` key.
 
 
-
-**Tips:** 
+**Tips:**
 
 - When writting paths in R always use `"` quotes
 - Try pressing the `Tab` key when writing paths - _RStudio_ will auto-complete 
@@ -132,22 +133,25 @@ which will vary depending on your username and operating system
 - paths can be _relative_ to where your working directory is at the moment
     - Use `../` to symbolise the directory _above_ your current directory
 
+--------
 
->### Exercise:
+R code can be saved into text documents, called scripts (usually with a file 
+extension `.R`). Writing code into scripts is ideal, because you keep a record 
+of all the operations that you did during your data analysis. This code can then 
+be re-run, modified, and shared for reproducible data analysis!
+
+> ### Exercise:
 > 
-> Throughout the course we will be using Rstudio, which is a program that provides 
-with a convenient interface to work with R. 
->
-> R code can be saved into text documents, called scripts (usually with a file 
-extension `.R`). In this course we will be using a special kind of document, 
-which is also text-based but mixes code and text. These are called "R Markdown" 
-files (with extension `.Rmd`) and we will be using them throughout the course.
->
->- Open the file "reading_data.Rmd" in the "module01_data_and_files" course folder
->- Try and complete the code following the instructions in that document
+> Create a script that does the following:
+> 
+> - Load the `tidyverse` package (using `library()`)
+> - Set the working directory to the `module01_data_and_files` folder (using `setwd()`)
+> - Read the CSV file that you previously exported from the _data_ directory (using `read_csv()`)
 
-During this exercise, we use `read_csv()` in order to read in R data thate are in a `.csv` format.
-You can find more information about other functions that can be used to read other file formats in R  [here](https://github.com/tidyverse/readr).
+During this exercise, we use `read_csv()` in order to read in R data thate are 
+in _CSV_ format.
+You can find more information about other functions that can be used to read other 
+file formats in R [here](https://github.com/tidyverse/readr).
 
 
 ## Homework

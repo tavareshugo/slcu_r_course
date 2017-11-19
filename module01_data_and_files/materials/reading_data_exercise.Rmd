@@ -1,0 +1,122 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# [SLCU R Course](https://tavareshugo.github.io/slcu_r_course/)
+
+## Reading data into R - solution to exercise
+
+>### Exercise:
+> 
+> Throughout the course we will be using Rstudio, which is a program that provides 
+with a convenient interface to work with R. 
+>
+> R code can be saved into text documents, called scripts (usually with a file 
+extension `.R`). Writing code into scripts is ideal, because you keep a record 
+of all the operations that you did during your data analysis. This code can then 
+be re-run, modified, and shared for reproducible data analysis!
+>
+>- Open the file "reading_data.Rmd" in the "module01_data_and_files" course folder
+>- Try and complete the code following the instructions in that document
+
+The full solution is given here, and an explanation follows below:
+
+``` r
+# First load all the libraries needed for this script
+library(tidyverse)
+
+# Check what the working directory is at the moment
+#  this is what "folder" R is working from at the moment
+getwd()
+
+# Set working directory to the course materials folder
+# Change this to be suitable to your situation
+setwd("/home/slcu.user/Desktop/slcu_r_course/module01_data_and_files")
+
+# Read the CSV file and store the table in an object called "my_surveys"
+## In this case, the CSV file is located in the "data" folder
+my_surveys <- read_csv("data/dataset_tidy.csv")
+
+# View the loaded table
+View(my_surveys)
+```
+
+### Exercise explanation
+
+When you start an analysis script, it's always best to load all the necessary 
+packages right at the top of your code - this way anyone using this code will 
+know what packages they need installed in order for the code to work:
+
+```{r, message=FALSE}
+library(tidyverse)
+```
+
+Then, it's good to see what is the _working directory_ that R is using 
+at the moment
+
+```{r, eval=FALSE}
+getwd()
+```
+
+The output of that command will vary depending on your operating system and 
+username. 
+
+For example, for a user called "slcu.user", this might be the default working directory 
+on a Mac:
+
+`/Users/slcu.user/`
+
+And this one on a Windows:
+
+`C:/Users/slcu.user/Documents`
+
+When doing an analysis, it's best to set the working directory to be in the 
+folder where your project is stored in. 
+
+Let's say that the course materials are on your Desktop. So, schematically, this 
+is where your data file is located:
+
+```
+Desktop
+  |
+  |_slcu_r_course
+      |
+      |_module01_data_and_files
+          |
+          |_data
+             |
+             |_dataset_tidy.csv
+```
+
+Therefore, it's best if you first change your working directory to be in 
+`module01_data_and_files`. 
+
+For our previous example this might be something like:
+
+```{r, eval=FALSE}
+# On a Mac
+setwd("/Users/slcu.user/Desktop/slcu_r_course/module01_data_and_files")
+
+# On a Windows
+setwd("C:/Users/slcu.user/Desktop/slcu_r_course/module01_data_and_files")
+```
+
+--------
+
+Now that you've set the working directory, you can read the data in by using 
+the function called `read_csv()`:
+
+```{r, eval=FALSE}
+surveys <- read_csv("data/dataset_tidy.csv")
+```
+
+_Note:_ there is another function called `read.csv()`, which is the usual 
+default function to read CSV files, and is very similar to `read_csv()`. 
+During the workshops we will use `read_csv()` as it is more convenient.
+
+

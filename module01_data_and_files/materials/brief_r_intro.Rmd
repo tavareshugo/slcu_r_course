@@ -1,0 +1,148 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# [SLCU R Course](https://tavareshugo.github.io/slcu_r_course/)
+
+## Brief introduction to R
+
+_R_ is a statistical software and programming language. 
+This means that, in order to do anything in _R_, we need to write down 
+instructions using specific code. 
+
+In this course we will be using RStudio, , which is a program that provides 
+with a convenient interface to work with R. 
+
+This is how RStudio tipically looks like:
+
+![](http://www.datacarpentry.org/R-ecology-lesson/img/rstudio-screenshot.png)
+
+There are 4 main panels, and we will learn about them progressively throughout 
+the course. 
+
+
+### Running commands in R
+
+For now, let's focus on the panel on the _bottom left_ called **Console**. This is 
+where R commands are executed and give an output.
+
+For example, we can use R as a calculator:
+
+```{r}
+# All the basic arithmetic operators in R
+3 + 2    # sum
+3 - 2    # subtraction
+3 * 2    # multiplication
+3 / 2    # division
+3 ^ 2    # exponentiation
+```
+
+Notice that lines starting with `#` symbol are "Comments", which R ignores and 
+does not run as code.
+
+
+### Creating objects
+
+We can store the output of a command in _objects_ that we can name.
+
+To store the result of some operation in a variable we use `<-`, which we can 
+think of as an arrow pointing left (note: no spaces between `<` and `-`!).
+
+```{r}
+# Store the result of this operation in a variable called "x"
+x <- 3 + 2
+```
+
+We can then re-use this variable again an again, for example:
+
+```{r}
+x + 1
+x + 2
+x * 2 + 3
+```
+
+Note that the value of `x` itself did not change:
+
+```{r}
+x
+```
+
+But we can change its value by "over-writing" it with a new value:
+
+```{r}
+x <- 6
+```
+
+Note that the previous value of `x` is lost. If we want it back we'd have to 
+run our previous commands again.
+
+> What do you think the value of `x` is after the following command?
+
+```{r, eval = FALSE}
+x <- x + 1
+```
+
+
+### Functions
+
+A lot of the functionality in R is in its functions, which allow us to perform 
+certain operations (sometimes very complicated ones) with a single command.
+
+We can recognise functions in code easily, because they always follow the pattern:
+
+`function(inputs)`
+
+that is, we have the function's name, then open parenthesis, and inside the parenthesis 
+we include all the necessary inputs (_arguments_) that the function needs to perform 
+its operations.
+
+We will come across many functions throughout the course, but here's a few examples 
+of functions that operate on a single number:
+
+```{r}
+# Square root of 3
+sqrt(3)
+
+# Round 3.14
+round(3.14)
+```
+
+We can see that the round function rounds our number to the nearest integer (no 
+decimal points). However, we might want to round the number to one, or two, or 
+three, etc., decimal points instead. In fact, we can do this with the `round()` 
+function, because it accepts extra _arguments_ as its input:
+
+```{r}
+# Round 3.14 to the nearest digit
+round(3.14, digits = 1)
+```
+
+Arguments within functions are separated by a comma `,`. 
+
+But how would we know what that option was called? Or that it even existed? 
+
+The answer is: by looking at its documentation. 
+Every function in R has a help page, which we can look at by using `?` followed 
+by the function's name, for example `?round`.
+
+From its help page we can see that this function accepts two arguments called 
+"x" and "digits". "x" is the number we want to round, and "digits" is the 
+number of decimal points we want to round to. 
+
+> Use these examples to understand more about how functions work:
+
+```{r}
+round(x = 2.72, digits = 1)
+round(digits = 1, x = 2.72)
+round(2.72, 1)
+round(1, 2.72)
+```
+
+---------------------------
+
+[Back to course home](https://tavareshugo.github.io/slcu_r_course/)
+
