@@ -1,7 +1,10 @@
 ---
-title: "Data Visualization with R"
 output: html_document
 ---
+
+# [SLCU R Course](https://tavareshugo.github.io/slcu_r_course/)
+
+## Data Visualization with R
 
 In this lesson we will learn how to explore tabular data, perform basic sanity 
 checks and do visualizations with [``ggplot2``](http://ggplot2.org/).
@@ -20,7 +23,7 @@ You can install packages by using the ``install.packages()`` function.
 For example, if you wanted to install the `plotly` package you would 
 do:
 
-```
+``` r
 install.packages("plotly")
 ```
 
@@ -33,7 +36,17 @@ library(visdat)
 library(plotly)
 ```
 
-Now our work space is ready. 
+You should also set your working directory to the folder containing this 
+lesson's materials. This will vary depending on your operating system. 
+
+``` r
+setwd("~/Desktop/slcu_r_course/module02_data_viz_ggplot/materials")
+```
+
+In this example, our working directory was set to the 
+`module02_data_viz_ggplot/materials` folder.
+
+Now our workspace is ready. 
 The only thing missing is the actual data set that we want to explore and visualize! 
 
 For this lesson we will use a slightly simplified version of a dataset published 
@@ -42,14 +55,15 @@ by [Burghard et al 2015](http://datadryad.org/resource/doi:10.5061/dryad.65d76).
 
 ## Read the data
 
-The simplified version of the data set can be found in the ``course_data`` folder 
-(`burghardt_et_al_2015_expt1.csv`). 
+The simplified version of the data set can be found in the ``module02_data_viz_ggplot/data`` 
+folder (`burghardt_et_al_2015_expt1.csv`). 
 
-Run the command below to read the data and store it in a variable called ``expt1`` 
-(referring to "experiment 1" of the published dataset):
+Because our working directory is in `module02_data_viz_ggplot/materials` folder, 
+we read the data like so:
 
 ```{r read data}
-expt1 <- read_csv("../course_data/burghardt_et_al_2015_expt1.csv")
+# Read data and store it in expt1 object
+expt1 <- read_csv("../data/burghardt_et_al_2015_expt1.csv")
 ```
 
 You will notice the `read_csv()` function gives you a message referring to 
@@ -250,11 +264,7 @@ ggplot(expt1, aes(genotype, days.to.flower)) +
   geom_boxplot()
 ```
 
-> **Exercise:** can you make a violin plot instead? (hint: ``?geom_violin``)
-
-```{r}
-# Put your code here!
-```
+> **Challenge:** can you make a violin plot instead? (hint: ``?geom_violin``)
 
 
 ### Adding multiple layers
@@ -270,10 +280,6 @@ ggplot(expt1, aes(genotype, rosette.leaf.num)) +
 
 >**Challenge:** can you modify this plot so that the points appear on top of the 
 boxplots rather than behind them?
-
-```{r}
-# Put your code here!
-```
 
 
 ### Colours!
@@ -345,10 +351,6 @@ between `blade.length.mm` and `rosette.leaf.num` and colour the points by
 >
 > What happens if you colour the points by `days.to.bolt`?
 
-```{r}
-# Put your code here!
-```
-
 
 ### Facetting
 
@@ -376,10 +378,6 @@ ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
 >**Challenge:** In the previous graph, colouring the genotype is redundant with 
 the facetting. Can you think of a more useful way to colour the points?
 
-```{r}
-# Put your code in here!
-```
-
 Now let's see how the same code works with `facet_grid()`:
 
 ```{r}
@@ -401,22 +399,15 @@ ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
 `fluctuation` treatment (as rows) and `day.length` (as columns) and colour the 
 points by genotype.
 
-```{r}
-# Put your code in here!
-```
-
 In conclusion, **by effectively combining facets, colours and other aesthetics 
 you can represent many dimensions of your data in a single graph!**
 
+-----
 
 >**Challenge**: Can you produce a graph similar to 
-![Fig. 2B-C of Burghard et al 2015](../course_data/Burghard_fig2BC.png). 
-
-**Hint**: facet the plot by `day.length` and `temperature` and fill the boxplots by `fluctuation`.
-
-```{r}
-# Put your code in here!
-```
+![Fig. 2B-C of Burghard et al 2015](../materials/Burghard_fig2BC.png). 
+>
+>**Hint**: facet the plot by `day.length` and `temperature` and fill the boxplots by `fluctuation`.
 
 
 ### Interactivity!
@@ -433,7 +424,9 @@ function.
 p1 <- ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = fluctuation)) + 
   geom_point() +
   facet_wrap(~genotype)
-plotly::ggplotly(p1)
+
+# Render an interactive plot using ggplotly function
+ggplotly(p1)
 ```
 
 

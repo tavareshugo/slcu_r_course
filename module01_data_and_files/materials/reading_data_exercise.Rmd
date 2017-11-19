@@ -11,18 +11,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Reading data into R - solution to exercise
 
->### Exercise:
+> ### Exercise:
 > 
-> Throughout the course we will be using Rstudio, which is a program that provides 
-with a convenient interface to work with R. 
->
-> R code can be saved into text documents, called scripts (usually with a file 
-extension `.R`). Writing code into scripts is ideal, because you keep a record 
-of all the operations that you did during your data analysis. This code can then 
-be re-run, modified, and shared for reproducible data analysis!
->
->- Open the file "reading_data.Rmd" in the "module01_data_and_files" course folder
->- Try and complete the code following the instructions in that document
+> Create a script that does the following:
+> 
+> - Load the `tidyverse` package (using `library()`)
+> - Set the working directory to the `module01_data_and_files` folder (using `setwd()`)
+> - Read the CSV file that you previously exported from the _data_ directory (using `read_csv()`)
 
 The full solution is given here, and an explanation follows below:
 
@@ -120,3 +115,6 @@ default function to read CSV files, and is very similar to `read_csv()`.
 During the workshops we will use `read_csv()` as it is more convenient.
 
 
+----------------------
+
+[Back to course home](https://tavareshugo.github.io/slcu_r_course/)

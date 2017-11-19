@@ -1,0 +1,100 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# [SLCU R Course](https://tavareshugo.github.io/slcu_r_course/)
+
+## Data Visualization with R - exercise solutions
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+expt1 <- read_csv("../data/burghardt_et_al_2015_expt1.csv")
+```
+
+
+> **Challenge:** can you make a violin plot instead? (hint: ``?geom_violin``)
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.flower)) +
+  geom_boxplot()
+```
+
+-----------------------
+
+>**Challenge:** can you modify this plot so that the points appear on top of the 
+boxplots rather than behind them?
+
+```{r}
+ggplot(expt1, aes(genotype, rosette.leaf.num)) +
+  geom_boxplot() + 
+  geom_jitter()
+```
+
+----------------------
+
+>**Challenge:** say we are particularly interested in the relationship between 
+number of rosette leafs and blade length in mm per genotype. 
+>
+> Visualize this relationship with a scatter plot (`geom_point()`)
+between `blade.length.mm` and `rosette.leaf.num` and colour the points by 
+`genotype`. 
+>
+> What happens if you colour the points by `days.to.bolt`?
+
+
+```{r}
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
+  geom_point()
+```
+
+If we colour the points by `days.to.bolt` the colour scale is continuous 
+rather than discrete (because `days.to.bolt` is a numeric variable):
+
+```{r}
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = days.to.bolt)) +
+  geom_point()
+```
+
+
+---------------------
+
+>**Challenge:** In the previous graph, colouring the genotype is redundant with 
+the facetting. Can you think of a more useful way to colour the points?
+
+```{r}
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = fluctuation)) +
+    geom_point() +
+    facet_wrap( ~ genotype)
+```
+
+
+------------------------
+
+>**Challenge:** Can you modify the previous graph to facet the data by the 
+`fluctuation` treatment (as rows) and `day.length` (as columns) and colour the 
+points by genotype.
+
+```{r}
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
+    geom_point() +
+    facet_grid(day.length ~ fluctuation)
+```
+
+
+------------------------
+
+>**Challenge**: Can you produce a graph similar to 
+![Fig. 2B-C of Burghard et al 2015](../materials/Burghard_fig2BC.png). 
+>
+>**Hint**: facet the plot by `day.length` and `temperature` and fill the boxplots by `fluctuation`.
+
+```{r}
+ggplot(expt1, aes(genotype, days.to.bolt, fill = fluctuation)) +
+    geom_boxplot() +
+    facet_grid(day.length ~ temperature)
+```
+

@@ -147,9 +147,10 @@ be re-run, modified, and shared for reproducible data analysis!
 > - Load the `tidyverse` package (using `library()`)
 > - Set the working directory to the `module01_data_and_files` folder (using `setwd()`)
 > - Read the CSV file that you previously exported from the _data_ directory (using `read_csv()`)
+([solution](reading_data_exercise.html))
 
 During this exercise, we use `read_csv()` in order to read in R data thate are 
-in _CSV_ format.
+in `.csv` format.
 You can find more information about other functions that can be used to read other 
 file formats in R [here](https://github.com/tidyverse/readr).
 
