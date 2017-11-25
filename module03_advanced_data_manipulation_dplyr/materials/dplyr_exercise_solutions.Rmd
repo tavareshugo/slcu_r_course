@@ -1,0 +1,78 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# [SLCU R Course](https://tavareshugo.github.io/slcu_r_course/)
+
+## Data manipulation with R - exercise solutions
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+expt1 <- read_csv("../data/burghardt_et_al_2015_expt1.csv")
+```
+
+----
+
+> **Challenge**: can you select all the columns that contain values measured in mm?
+
+```{r}
+select(expt1, contains("mm"))
+```
+
+----
+
+> **Challenge:**
+> Can you filter the data to keep the following?
+>
+> 1. Samples that are **not in the the Ler background** and that have been 
+> treated with **fluctuating temperature**.
+> 2. Samples that bolted in less than **57 days** and with **less than 40 leaves**
+> 3. Samples of genotype `fca-6` for which `blade.ratio` is not missing
+
+```{r}
+# Point 1
+filter(expt1, background != "Ler" & fluctuation == "Var")
+  
+# Point 2
+filter(expt1, days.to.bolt < 57 & cauline.leaf.num < 40)
+
+# Point 3
+filter(expt1, genotype == "fca-6" & !is.na(blade.ratio))
+```
+
+----
+
+> **Challenge:**
+> Using `%>%` to do the following on `expt1`:
+>
+> - Keep samples that are _not_ in the the Ler background and that have been 
+treated with fluctuating temperature.
+> - Transform the blade length in cm
+> - Keep only the columns containing information about the genotype, blade 
+length (in cm) and bolting information (hint: use `contains()`)
+
+```{r}
+expt1 %>% 
+  filter(background != "Ler" & fluctuation == "Var") %>% 
+  mutate(blade.length.cm = blade.length.mm/10) %>% 
+  select(genotype, blade.length.cm, contains("bolt"))
+```
+
+-----
+
+> **Challenge:**
+> Can you make a violin plot of the days to flower for the different genotypes 
+that have been growing in short days (8h light)? 
+
+```{r}
+expt1 %>% 
+  filter(day.length == 8) %>% 
+  ggplot(aes(genotype, days.to.flower)) +
+  geom_violin()
+```
+
+
