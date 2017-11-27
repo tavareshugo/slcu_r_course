@@ -4,7 +4,7 @@ output: html_document
 
 # [SLCU R Course](https://tavareshugo.github.io/slcu_r_course/)
 
-## Data manipulation with R - exercise solutions
+## Data manipulation with R - material
 
 In this module we are going to see how to manipulate, subset and modify tables 
 using `dplyr`, which is also a part of the `tidyverse` package family.
@@ -218,7 +218,7 @@ We can pipe data manipulation to `ggplot` to produce graphs for a subset of
 the data. This is very useful for interactive data exploration (it avoids having 
 to constantly create new variables with `<-`).
 
-Let's say we want to make a boxplot of the flowering time in function if the 
+Let's say we want to make a boxplot of the flowering time in function of the 
 temperature fluctuation (like in last session), however only for the vernalised 
 samples. For this, we can use the following code: 
 
@@ -249,7 +249,7 @@ expt1 %>%
   summarise(mean.days.to.flower = mean(days.to.flower, na.rm = TRUE))
 ```
 
-You can the that the output contains two columns: `genotype`, which was the 
+You can see that the output contains two columns: `genotype`, which was the 
 column used to "group" the original table and `mean.days.to.flower`, which was 
 the column we created with the `summarise` function. And there's only 10 rows 
 of this new table, which corresponds to one row for each genotype.
