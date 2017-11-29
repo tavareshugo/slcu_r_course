@@ -48,7 +48,7 @@ As an example dataset we will be using real data published by
 
 #### Module 3
 
-Data manipulation
+[Data manipulation](module03_advanced_data_manipulation_dplyr/materials/dplyr_lesson.html)
 
 
 ### Software installation<a name="software_installation"></a>
