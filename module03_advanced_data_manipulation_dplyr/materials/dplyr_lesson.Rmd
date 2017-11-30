@@ -239,7 +239,9 @@ that have been growing in short days (8h light)?
 Sometimes we might want to summarise our data into a smaller table.
 
 This kind of operation can be achieved by combining two `dplyr` functions: 
-`group_by()` and `summarise()`.
+`group_by()` and `summarise()`. Please note, grouping with `group_by()` doesn't 
+change how the data looks (apart from listing how it's grouped). We can then do
+summaries based on those groupings with `summarise()`.
 
 For example, we can summarise the mean flowering time for each genotype:
 
@@ -325,6 +327,9 @@ it with a collaborator (or later use in R ourselves):
 ```{r, eval = FALSE}
 expt1.blade.ratio.clean <- expt1 %>% 
   filter(!is.na(blade.ratio))
+
+#alternatively, we can use drop_na() function that we used in the module02:
+expt1.blade.ratio.clean2 <- expt1 %>% drop_na(blade.ratio)
 
 write_csv(expt1.blade.ratio.clean, path = "../data/expt1_blade_ratio_clean.csv")
 ```
