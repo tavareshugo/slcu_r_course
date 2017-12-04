@@ -1,0 +1,25 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Today we will spend more time solving practical problems, trying to apply the
+concepts and principles that we have learned in modules01-03:
+- reading data from csv files;
+- performing sanity checks;
+- manipulating data with ``dplyr``;
+- building custom visualiztions with ``ggplot``;
+
+
+# Set up the environment
+# Download the data ----
+
+# Check that dataset does not contain obvious problems ---
+
+# Data transforms ----
+
+# Build plots ----
+

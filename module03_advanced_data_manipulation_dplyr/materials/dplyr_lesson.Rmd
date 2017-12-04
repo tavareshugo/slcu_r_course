@@ -284,7 +284,8 @@ expt1 %>%
   summarise(mean.days.to.flower = mean(days.to.flower, na.rm = TRUE),
             n.obs = n())
 ```
-
+Please note, you can use ``n()`` only inside ``summarise()`` function. There is
+a similar function, ``count()`` that can be used independently and piped in.
 Because counting the number of observations in a group is such a common operation,
 there's actually a special function, `count()` just to do that one thing:
 
@@ -314,7 +315,6 @@ the table remains grouped by the variables you defined. This means that any oper
 you do afterwards will use this grouping, which might not be desirable! There is a 
 function called `ungroup()`, which is usually good to use after you finish your 
 operations.
-
 
 ### Saving data to a file
 
