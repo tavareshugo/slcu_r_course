@@ -22,7 +22,6 @@ First let's load the `tidyverse` package:
 
 ```{r, message = FALSE}
 library(tidyverse)
-
 ```
 
 
@@ -118,7 +117,6 @@ gene_expression_more
 If we want to combine this data set with the previous table, keeping only data for samples from the 1st data set, we can use `left_join()`:
 
 ```{r}
-
 gene_expression_combined_left <- left_join(gene_expression,gene_expression_more,
                                            by="sample")
 gene_expression_combined_left
@@ -136,7 +134,6 @@ Note that it adds `NA` if there is no data for a sample in the second data set.
 To keep only data for samples from the 2nd data set, we can use `right_join()`:
 
 ```{r}
-
 gene_expression_combined_right <- right_join(gene_expression,gene_expression_more,
                                            by="sample")
 gene_expression_combined_right
@@ -146,7 +143,6 @@ gene_expression_combined_right
 To keep data for all samples, we can use `full_join()`:
 
 ```{r}
-
 gene_expression_combined_full <- full_join(gene_expression,gene_expression_more,
                                            by="sample")
 gene_expression_combined_full
@@ -157,7 +153,6 @@ gene_expression_combined_full
 We might also want to know what is common between two data sets. To keep samples (from one column) that are in the two data sets, we can use `inner_join()`:
 
 ```{r}
-
 gene_expression_combined_semi <- inner_join(gene_expression,gene_expression_more,
                                            by="sample")
 gene_expression_combined_semi
@@ -195,7 +190,6 @@ gene_expression_descending_gene1
   - `spread()`
   - `left_join()`, `right_join()`, `full_join()` and `inner_join()`
   - `arrange()`
-
 
 
 ### Futher reading and additional resources:
