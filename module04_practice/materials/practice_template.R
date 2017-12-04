@@ -70,6 +70,7 @@ data_long_interest <- filter(data_long, gene %in% genes_of_interest)
 ggplot(data_long_interest, aes(time, expression, group = temperature)) +
     geom_point(aes(color = temperature)) +
     geom_line(aes(color = temperature)) +
-    facet_wrap(~ gene)
+    facet_wrap(~ gene, nrow = 5, switch = "y") +
+    ggtitle("my favourite genes")
 
 # Save transformed data to file
