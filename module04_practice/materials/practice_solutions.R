@@ -4,7 +4,6 @@
 library(visdat) # for initial inspection of data
 library(tidyverse) # for manipulation of data
 library(plotly) # for building interactive plots
-#library(stringr) # might not need this in the end
 
 # Download the data ----
 
