@@ -1,5 +1,8 @@
 ---
-output: html_document
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
 ---
 
 # [SLCU R Course](https://tavareshugo.github.io/slcu_r_course/)
