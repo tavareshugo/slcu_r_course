@@ -51,6 +51,11 @@ As an example dataset we will be using real data published by
 [Data manipulation](module03_advanced_data_manipulation_dplyr/materials/dplyr_lesson.html)
 
 
+#### Module 4
+
+[Advanced data manipulation](module04_practice/materials/advanced_dplyr_lesson.html)
+
+
 ### Software installation<a name="software_installation"></a>
 
 You will need a laptop with the following software installed:
