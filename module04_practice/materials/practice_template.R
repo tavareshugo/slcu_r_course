@@ -28,7 +28,7 @@ data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpr
 # Data transforms ----
 # Now, let's transform our data. We will do it in several steps and 
 # ultimately we will generate a tidy dataset, suitable for applying ggplot 
-# functions 
+# functions.
 
 # 1. Transform dataset from wide to long format: ----
 # Hint: one of two: gather() or spread() should be able to help you.
@@ -36,7 +36,7 @@ data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpr
 
 
 
-# Check dimesioned in the transformed dataset, do the match your expectatios? 
+# Check dimesiones of the transformed dataset, do they match your expectatios? 
 # Hint: compare with dimensions of the original dataset with dim() function.
 
 
@@ -45,7 +45,7 @@ data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpr
 # 2. Tidy varibales ----
 # You might have noticed that now you have a column that contains several 
 # variables cramped together: time and temperature. Let's split it in 4 
-# columns: "units", "geotype", "time" and "temperature" using separate() function.
+# columns: "units", "genotype", "time" and "temperature" using separate() function.
 
 
 
@@ -62,11 +62,11 @@ data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpr
 
 
 
-# 4. filter rows with low expression values ----
+# 4. Filter rows with low expression values ----
 # When dealing with expression data we often have lots of genes that are barely 
 # expressed. Let's get rid of them, this should slightly reduce the size of our
 # dataset.
-# Hint: use filter to select rows with expression values greater than 1 TPM.
+# Hint: use filter() to select rows with expression values greater than 1 TPM.
 
 
 
@@ -82,8 +82,7 @@ data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpr
 # After all the transformations our dataset is ready to be plotted. Use any type
 # of visualization you find suitable to the problem to get a basic understanding
 # of the structure  of your data. 
-# Hint: initialize plot with ggplot() and select a suitable geom_*. Have a look
-# at the examples provided in the module02 materials. 
+# Hint: initialize plot with ggplot(), specify axes and plot-wise aesthetics inside aes(), and select a suitable geom_*. When in doubt, have a look at the examples provided in the module02 materials. 
 
 
 
@@ -96,12 +95,13 @@ genes_of_interest <- c("AT1G67090", "AT5G19240", "AT1G31580", "AT3G12580",
                        "AT1G80920", "AT3G54660", "AT2G25110", "AT1G19530",
                        "AT3G23990", "AT3G30775")
 
-# filter data_long for genes of interest:
+# Now, lets subset expression data (data_long) for only our genes_of_iterest.
+# Hint: use filter() and %in%
 
 
 
 
-# build line plots for every gene of interest, facet by gene_id. Can you put
+# Build line plots for every gene of interest, facet by gene_id. Can you put
 # measurments for both temperatures in a songle plot?
 
 
@@ -113,7 +113,7 @@ genes_of_interest <- c("AT1G67090", "AT5G19240", "AT1G31580", "AT3G12580",
 
 
 
-# Bonus challenge for superheroes: now do the same with pipes (excluding exploratory stages)! ----
+# Bonus challenge for superheroes: now do all the same steps, from data transformation to plotting with pipes (excluding exploratory stages)! ----
 
 
 
