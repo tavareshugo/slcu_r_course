@@ -20,7 +20,7 @@ Please, note, here we are using `read_tsv()` because original file is
 tab-separated, not comma-separated ('csv')
 
 ```{r}
-data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpressed.tsv")
+mydata <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpressed.tsv")
 ```
 
 ### 3. Check that dataset does not contain obvious problems
@@ -36,9 +36,9 @@ Guide questions:
 > ``View()``, ``vis_dat()``, ``dim()``, ``glimpse()``, ``names()``
 
 ```{r}
-dim(data)
-names(data)
-vis_dat(data)
+dim(mydata)
+names(mydata)
+vis_dat(mydata)
 ```
 
 ### 4. Data transforms
@@ -52,8 +52,8 @@ functions
 
 ```{r}
 # gather the dataset:
-data_long <- data %>% 
-    gather(sample, expression, names(data)[2:7])
+data_long <- mydata %>% 
+    gather(sample, expression, names(mydata)[2:7])
 ```
 
 Check dimesiones in the transformed dataset, do they match your expectatios? 
@@ -159,19 +159,18 @@ genes_of_interest <- c("AT1G67090", "AT5G19240", "AT1G31580", "AT3G12580",
                        "AT1G80920", "AT3G54660", "AT2G25110", "AT1G19530",
                        "AT3G23990", "AT3G30775")
 
-data_long <- data %>% 
+mydata %>% 
     gather(sample, expression, names(data)[2:7]) %>%
-    separate(sample, sep = '_', into = c("units", "genotype", "temperature", "time")) %>%
+    separate(sample, sep = '_',
+             into = c("units", "genotype", "temperature", "time")) %>%
     select(c("gene", "expression", "temperature", "time")) %>%
-    filter(expression >= 1 & gene  %in% genes_of_interest) %>%
+    filter(expression >= 1 & gene %in% genes_of_interest) %>%
     ggplot(aes(time, expression, group = temperature)) +
     geom_point(aes(color = temperature)) +
     geom_line(aes(color = temperature)) +
     facet_wrap(~ gene, nrow = 5, scales = 'free') +
     ggtitle("my favourite genes")
 
-write_csv(data_long_interest, "../data/my_favourite_genes.csv")
- 
 ```
 
 

@@ -10,7 +10,7 @@ library(plotly) # for building interactive plots
 # Please, note, here we are using `read_tsv()` because original file is
 # tab-separated, not comma-separated ('csv')
 
-data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpressed.tsv")
+mydata <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpressed.tsv")
 
 # Check that dataset does not contain obvious problems ---
 
@@ -25,6 +25,8 @@ data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpr
 # View(), vis_dat(), dim(), glimpse(), names()
 
 
+
+
 # Data transforms ----
 # Now, let's transform our data. We will do it in several steps and 
 # ultimately we will generate a tidy dataset, suitable for applying ggplot 
@@ -36,7 +38,7 @@ data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpr
 
 
 
-# Check dimesiones of the transformed dataset, do they match your expectatios? 
+# Check dimensions of the transformed dataset, do they match your expectatios? 
 # Hint: compare with dimensions of the original dataset with dim() function.
 
 

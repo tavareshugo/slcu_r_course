@@ -10,7 +10,7 @@ library(plotly) # for building interactive plots
 # Please, note, here we are using `read_tsv()` because original file is
 # tab-separated, not comma-separated ('csv')
 
-data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpressed.tsv")
+mydata <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpressed.tsv")
 
 # Check that dataset does not contain obvious problems ---
 
@@ -24,9 +24,9 @@ data <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpr
 # Hint: check the functions that we have discussed in the module02:
 # View(), vis_dat(), dim(), glimpse(), names()
 
-View(data)
-vis_dat(data)
-dim(data)
+View(mydata)
+vis_dat(mydata)
+dim(mydata)
 
 # Data transforms ----
 # Now, let's transform our data. We will do it in several steps and 
@@ -37,8 +37,8 @@ dim(data)
 # Hint: one of two: gather() or spread() should be able to help you.
 
 # gather the dataset:
-data_long <- data %>% 
-    gather(sample, expression, names(data)[2:7])
+data_long <- mydata %>% 
+    gather(sample, expression, names(mydata)[2:7])
 
 # Check dimesioned in the transformed dataset, do the match your expectatios? 
 # Hint: compare with dimensions of the original dataset with dim() function.
@@ -76,7 +76,7 @@ dim(data_long)
 # 1. Initial visualization
 # After all the transformations our dataset is ready to be plotted. Use any type
 # of visualization you find suitable to the problem to get a basic understanding
-# of the structure  of your data. 
+# of the structure of your data. 
 # Hint: initialize plot with ggplot() and select a suitable geom_*. Have a look
 # at the examples provided in the module02 materials. 
 
@@ -88,8 +88,6 @@ ggplot(data_long, aes(time, expression, colour = time)) +
 # Say, now we are interested in 10 specific genes and we want to visualize their 
 # expression in different temperatures over time.
 
-# randomly sample genes of interest (need to select better examples :))
-genes_of_interest <- sample(unique(data_long$gene), 10)
 genes_of_interest <- c("AT1G67090", "AT5G19240", "AT1G31580", "AT3G12580",
                        "AT1G80920", "AT3G54660", "AT2G25110", "AT1G19530",
                        "AT3G23990", "AT3G30775")
@@ -121,8 +119,8 @@ genes_of_interest <- c("AT1G67090", "AT5G19240", "AT1G31580", "AT3G12580",
                        "AT1G80920", "AT3G54660", "AT2G25110", "AT1G19530",
                        "AT3G23990", "AT3G30775")
 
-data_long <- data %>% 
-    gather(sample, expression, names(data)[2:7]) %>%
+mydata %>% 
+    gather(sample, expression, names(mydata)[2:7]) %>%
     separate(sample, sep = '_', into = c("units", "genotype", "temperature", "time")) %>%
     select(c("gene", "expression", "temperature", "time")) %>%
     filter(expression >= 1 & gene  %in% genes_of_interest) %>%
@@ -132,4 +130,3 @@ data_long <- data %>%
     facet_wrap(~ gene, nrow = 5, scales = 'free') +
     ggtitle("my favourite genes")
 
-write_csv(data_long_interest, "../data/my_favourite_genes.csv")
