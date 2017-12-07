@@ -191,6 +191,34 @@ arrange(gene_expression, desc(gene1))
 ```
 
 
+### Seperate one column into several ones
+
+Sometimes, we might have different kind of information into one column and want to split it into several ones. 
+For this, we can use `separate()`.
+
+First, let's open a data with a column we would like to split:
+```{r}
+genotypes_to_split <- read_csv("../data/Genotypes_to_split.csv")
+genotypes_to_split
+```
+
+Now let's separate the first column into 2 columns with information about thr mutation in one column and about the ecotype in the other. For this we use `separate()`:
+
+```{r}
+genotypes_split <- separate(genotypes_to_split, genotype, into=c("mutant","ecotype"), sep=" ")
+genotypes_split
+```
+Note how `separate()` removed the original column and replaced it with the newly created ones.
+
+
+`seperate()` function needs four things:
+
+- the name of the data set
+- the name of the column to separate
+- the names of the columns to create (`into=c("mutant","ecotype")`) 
+- the type of separator to split the column (`sep=" "`).
+
+
 ### Changing order of labels in plots
 
 In the plot we previously did showing our gene expression distribution:
@@ -245,6 +273,7 @@ gene_expression_long %>%
     - `spread()`
     - `left_join()`, `right_join()`, `full_join()`, `inner_join()` and `anti_join()`
     - `arrange()`
+    - `separate()`
 - Change the order of categorical variables in your graphs using `factor()`
 - There are many `dplyr` functions we did not cover, but two additional useful 
 ones are:
