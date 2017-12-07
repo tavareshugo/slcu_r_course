@@ -59,6 +59,8 @@ As an example dataset we will be using real data published by
 
 [Dataset](https://raw.githubusercontent.com/tavareshugo/slcu_r_course/master/module04_practice/data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misexpressed.tsv)
 
+[Solutions!](module04_practice/materials/practice_solutions.html)
+
 
 ### Further resources
 
