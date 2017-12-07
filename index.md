@@ -54,7 +54,7 @@ As an example dataset we will be using real data published by
 #### Module 4
 
 [Advanced data manipulation](module04_practice/materials/advanced_dplyr_lesson.html)
-
+[Practice exercise](slcu_r_course/module04_practice/materials/practice_template.R)
 
 ### Software installation<a name="software_installation"></a>
 
