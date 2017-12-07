@@ -57,6 +57,14 @@ As an example dataset we will be using real data published by
 
 [Practice exercise](https://raw.githubusercontent.com/tavareshugo/slcu_r_course/master/module04_practice/materials/practice_template.R)
 
+
+### Further resources
+
+The University runs several introduction courses on R and other topics (bioinformatics, image analysis, etc.):
+
+- [Full course list](https://www.training.cam.ac.uk/search?course_type_facet_shown=&scheduled=on&course_date_facet_shown=true&course_availability_facet_shown=&provider_1345591=on&provider_facet_shown=&scrollPos=627)
+    - Intro to statistics (using R): https://www.training.cam.ac.uk/event/2235484
+
 ### Software installation<a name="software_installation"></a>
 
 You will need a laptop with the following software installed:
