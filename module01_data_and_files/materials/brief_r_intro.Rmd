@@ -57,36 +57,36 @@ think of as an arrow pointing left (note: no spaces between `<` and `-`!).
 
 ```{r}
 # Store the result of this operation in a variable called "x"
-x <- 3 + 2
+my_variable <- 3 + 2
 ```
 
 We can then re-use this variable again an again, for example:
 
 ```{r}
-x + 1
-x + 2
-x * 2 + 3
+my_variable + 1
+my_variable + 2
+my_variable * 2 + 3
 ```
 
-Note that the value of `x` itself did not change:
+Note that the value of `my_variable` itself did not change:
 
 ```{r}
-x
+my_variable
 ```
 
 But we can change its value by "over-writing" it with a new value:
 
 ```{r}
-x <- 6
+my_variable <- 6
 ```
 
-Note that the previous value of `x` is lost. If we want it back we'd have to 
+Note that the previous value of `my_variable` is lost. If we want it back we'd have to 
 run our previous commands again.
 
-> What do you think the value of `x` is after the following command?
+> What do you think the value of `my_variable` is after the following command?
 
 ```{r, eval = FALSE}
-x <- x + 1
+my_variable <- my_variable + 1
 ```
 
 
@@ -145,7 +145,79 @@ round(2.72, 1)
 round(1, 2.72)
 ```
 
----------------------------
 
-[Back to course home](https://tavareshugo.github.io/slcu_r_course/)
+## Understanding our directory struture
+
+First of all, let's see what is the _working directory_ that R is using at the 
+moment:
+
+```{r}
+# Run this line of code by pressing Ctrl + Enter
+getwd()
+```
+
+With R Markdown files, the working directory is set to the location of the file 
+itself.
+
+Our data file is located in a different folder from this document. The file 
+structure is, schematically:
+
+```
+slcu_r_course
+  |
+  |_course_data
+  |   |
+  |   |_dataset_tidy.xls
+  |
+  |_module01_data_and_files (our working directory)
+      |
+      |_reading_data.Rmd
+```
+
+Therefore, to read our `CSV` file, we will need to tell _R_ to go one 
+folder "above" where we are and then into the "course_data" folder. 
+
+We can move to "one directory above" using `../`. For example:
+
+```{r}
+# This command lists the files in the directory above the current one
+list.files("../")
+```
+
+**Changing the code above, can you list the files in the "course_data" folder?**
+
+```{r}
+# Complete this code
+list.files("<here>")
+```
+
+
+## Reading data into R
+
+To read a `CSV` file into R, we will use a function called `read_csv()`. 
+
+This function is part of a package called `tidyverse`, which we need to load 
+first:
+
+```{r, message=FALSE}
+library(tidyverse)
+```
+
+Now, try to complete the code below to read our data into R:
+
+```{r, eval = FALSE}
+# Complete this code:
+surveys <- read_csv("<here>")
+```
+
+_Note:_ there is another function called `read.csv()`, which is the usual 
+default function to read CSV files, and is very similar to `read_csv()`. 
+During the workshops we will use `read_csv()` as it is more convenient.
+
+
+## Homework
+
+Based on the principles outlined in this module, try and organise your files and data, and then open your file into R.
+
+If you encounter any difficulties, we will discuss them in the next module!
 

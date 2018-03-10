@@ -42,6 +42,8 @@ As an example dataset we will be using real data published by
 
 [Data organisation](module01_data_and_files/materials/data_organisation.md)
 
+[Intro to R and read your data into R](module01_data_and_files/materials/brief_r_intro.Rmd)
+
 #### Module 2
 
 [Data visualisation](module02_data_viz_ggplot/materials/ggplot_lesson.html)
