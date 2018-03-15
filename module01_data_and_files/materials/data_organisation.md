@@ -1,4 +1,9 @@
-Adapted from [here](http://www.datacarpentry.org/spreadsheet-ecology-lesson/).
+[back to course home](https://tavareshugo.github.io/slcu_r_course/)
+
+---------
+
+
+These materials are adapted from [here](http://www.datacarpentry.org/spreadsheet-ecology-lesson/).
 
 ## Motivation
 
@@ -85,86 +90,13 @@ This is the recommended way to export data ready to be imported into _R_.
 directory)
 
 
-## Reading data into R
-
-_R_ is a statistical software and programming language. 
-This means that, in order to do anything in _R_, we need to literally write down 
-instructions using specific code. 
-
-([Short intro to RStudio](brief_r_intro.html))
-
-And so, to read files in _R_ we need to learn how to tell the program where 
-our file is... without using the file browser!
-
-This is done by specifying the **path** to that file. This is like an address of 
-where that file is located on the computer.
-
-File paths are built like so:
-
-`directory/subdirectory/another_subdirectory/some_file.txt`
-
-* Each directory is split by a `/` 
-* The file name comes at the end (don't forget to include the file extension!)
-* Spaces should be avoided, but in R they are tolerated
-
-But what is the starting point of this *path*? 
-
-This varies between operating system, but generally a good way to start is to look 
-at the **working directory** that _R_ is using. This is the *path* that _R_ is
-taking as its reference point while you are working. 
-
-
->### Exercise:
->
-> - Open RStudio
-> - Run this command in _R_ to find what your default _working directory_ is: `getwd()`
-> - Try changing your working directory using the command `setwd("new/working/dir")`
->   - Tip: write down this code `setwd("")` and while your cursor is inside the 
-quotes press the `Tab` key.
-
-
-**Tips:**
-
-- When writting paths in R always use `"` quotes
-- Try pressing the `Tab` key when writing paths - _RStudio_ will auto-complete 
-the path for you
-- If you start your path with the `~` symbol, this means "your home directory", 
-which will vary depending on your username and operating system
-- paths can be _relative_ to where your working directory is at the moment
-    - Use `../` to symbolise the directory _above_ your current directory
-
---------
-
-R code can be saved into text documents, called scripts (usually with a file 
-extension `.R`). Writing code into scripts is ideal, because you keep a record 
-of all the operations that you did during your data analysis. This code can then 
-be re-run, modified, and shared for reproducible data analysis!
-
-> ### Exercise:
-> 
-> Create a script that does the following:
-> 
-> - Load the `tidyverse` package (using `library()`)
-> - Set the working directory to the `module01_data_and_files` folder (using `setwd()`)
-> - Read the CSV file that you previously exported from the _data_ directory (using `read_csv()`)
-([solution](reading_data_exercise.html))
-
-During this exercise, we use `read_csv()` in order to read in R data thate are 
-in `.csv` format.
-You can find more information about other functions that can be used to read other 
-file formats in R [here](https://github.com/tidyverse/readr).
-
-
-## Homework
-
-Based on the principles outlined in this module, try and tidy one of your own
-datasets and then read it into R.
-
-If you encounter any difficulties, we will discuss them in the next module!
-
-
 ## Further reading
 
 - [Formatting data tables in Spreadsheets](http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/) 
 - [Formatting problems](http://www.datacarpentry.org/spreadsheet-ecology-lesson/02-common-mistakes/)
 - [Wickam H (2014), _Tidy Data_, J Stat Soft](https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf)
+
+
+---------
+
+[back to course home](https://tavareshugo.github.io/slcu_r_course/)

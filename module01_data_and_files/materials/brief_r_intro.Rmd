@@ -1,4 +1,5 @@
 ---
+title: SLCU R Course
 output:
   html_document:
     toc: yes
@@ -9,9 +10,11 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# [SLCU R Course](https://tavareshugo.github.io/slcu_r_course/)
+[back to course home](https://tavareshugo.github.io/slcu_r_course/)
 
-## Brief introduction to R
+---------
+
+# Brief introduction to R
 
 _R_ is a statistical software and programming language. 
 This means that, in order to do anything in _R_, we need to write down 
@@ -28,7 +31,7 @@ There are 4 main panels, and we will learn about them progressively throughout
 the course. 
 
 
-### Running commands in R
+## Running commands in R
 
 For now, let's focus on the panel on the _bottom left_ called **Console**. This is 
 where R commands are executed and give an output.
@@ -48,7 +51,7 @@ Notice that lines starting with `#` symbol are "Comments", which R ignores and
 does not run as code.
 
 
-### Creating objects
+## Creating objects
 
 We can store the output of a command in _objects_ that we can name.
 
@@ -90,7 +93,7 @@ my_variable <- my_variable + 1
 ```
 
 
-### Functions
+## Functions
 
 A lot of the functionality in R is in its functions, which allow us to perform 
 certain operations (sometimes very complicated ones) with a single command.
@@ -146,78 +149,156 @@ round(1, 2.72)
 ```
 
 
-## Understanding our directory struture
+## Scripts
+
+R code can be saved into text documents, called scripts (usually with a file 
+extension `.R`). Writing code into scripts is ideal, because you keep a record 
+of all the operations that you did during your data analysis. This code can then 
+be re-run, modified, and shared for reproducible data analysis!
+
+You can start a new script by clicking on the menu button with the green "plus" symbol, 
+on the top-left and selecting "R script". A new document opens in the _top left_ 
+panel of RStudio. 
+
+This new panel is a text editor, with some extra functionality like code highlighting 
+and some auto-completion functionality. 
+
+It is advised that all your analysis code is stored in a script file. 
+
+
+# Reading data into R
+
+To read files in _R_ we need to learn how to tell the program where 
+our file is... without using the file browser!
+
+This is done by specifying the **path** to that file. This is like an address of 
+where that file is located on the computer.
+
+File paths are built like so:
+
+`directory/subdirectory/another_subdirectory/some_file.txt`
+
+* Each directory is split by a `/` 
+* The file name comes at the end (don't forget to include the file extension!)
+* Spaces should be avoided, but in R they are tolerated
+
+But what is the starting point of this *path*? 
+
+This varies between operating system, but generally a good way to start is to look 
+at the **working directory** that _R_ is using. This is the *path* that _R_ is
+taking as its reference point while you are working. 
+
+
+## Understanding your directory struture
 
 First of all, let's see what is the _working directory_ that R is using at the 
 moment:
 
-```{r}
-# Run this line of code by pressing Ctrl + Enter
+```{r, eval=FALSE}
 getwd()
 ```
 
-With R Markdown files, the working directory is set to the location of the file 
-itself.
+The output of that command will vary depending on your operating system and 
+username. 
 
-Our data file is located in a different folder from this document. The file 
-structure is, schematically:
+For example, for a user called "slcu.user", this might be the default working directory 
+on a Mac:
+
+`/Users/slcu.user/`
+
+And this one on a Windows:
+
+`C:/Users/slcu.user/Documents`
+
+When doing an analysis, it's best to set the working directory to be in the 
+folder where your project is stored in. 
+
+Let's say that the course materials are on your Desktop. So, schematically, this 
+is where your data file is located:
 
 ```
-slcu_r_course
+Desktop
   |
-  |_course_data
-  |   |
-  |   |_dataset_tidy.xls
-  |
-  |_module01_data_and_files (our working directory)
+  |_slcu_r_course
       |
-      |_reading_data.Rmd
+      |_module01_data_and_files
+          |
+          |_data
+             |
+             |_dataset_tidy.csv
 ```
 
-Therefore, to read our `CSV` file, we will need to tell _R_ to go one 
-folder "above" where we are and then into the "course_data" folder. 
+Therefore, it's best if you first change your working directory to be in 
+`module01_data_and_files`. 
 
-We can move to "one directory above" using `../`. For example:
+We can change the working directory using the function `getwd()`. 
+For our previous example this might be something like:
 
-```{r}
-# This command lists the files in the directory above the current one
-list.files("../")
-```
+```{r, eval=FALSE}
+# On a Mac
+setwd("/Users/slcu.user/Desktop/slcu_r_course/module01_data_and_files")
 
-**Changing the code above, can you list the files in the "course_data" folder?**
-
-```{r}
-# Complete this code
-list.files("<here>")
+# On a Windows
+setwd("C:/Users/slcu.user/Desktop/slcu_r_course/module01_data_and_files")
 ```
 
 
-## Reading data into R
+> ### Exercise
+>
+> Change your working directory to your course materials folder following the examples above. 
+Confirm that the working directory has changed by running the `getwd()` command again.
+
+
+**Tips:**
+
+- When writting paths in R always use `"` quotes
+- Try pressing the `Tab` key when writing paths - _RStudio_ will auto-complete 
+the path for you
+- If you start your path with the `~` symbol, this means "your home directory", 
+which will vary depending on your username and operating system
+- paths can be _relative_ to where your working directory is at the moment
+    - Use `../` to symbolise the directory _above_ your current directory
+
+
+## Read CSV files
 
 To read a `CSV` file into R, we will use a function called `read_csv()`. 
 
-This function is part of a package called `tidyverse`, which we need to load 
-first:
+This function is part of a package called `tidyverse`, which you will need to load 
+first using the `library()` function:
 
 ```{r, message=FALSE}
 library(tidyverse)
 ```
 
-Now, try to complete the code below to read our data into R:
-
-```{r, eval = FALSE}
-# Complete this code:
-surveys <- read_csv("<here>")
-```
-
 _Note:_ there is another function called `read.csv()`, which is the usual 
 default function to read CSV files, and is very similar to `read_csv()`. 
-During the workshops we will use `read_csv()` as it is more convenient.
+During the workshops we will use `read_csv()`, as it is more convenient.
+
+--------
+
+> ### Exercise
+> 
+> Create a script that does the following:
+> 
+> - Load the `tidyverse` package (using `library()`)
+> - Set the working directory to the `module01_data_and_files` folder (using `setwd()`)
+> - Read the CSV file that you previously exported from the _data_ directory (using `read_csv()`)
+([solution](reading_data_exercise.html))
 
 
-## Homework
+# Further reading
 
-Based on the principles outlined in this module, try and organise your files and data, and then open your file into R.
+- [Functions to read other file formats](http://readr.tidyverse.org/)
+
+
+# Homework
+
+Based on the principles outlined in this module, try and organise your own files and 
+data, and then read it into R.
 
 If you encounter any difficulties, we will discuss them in the next module!
 
+-------
+
+[back to course home](https://tavareshugo.github.io/slcu_r_course/)
