@@ -1,13 +1,18 @@
 ---
+title: SLCU R Course
 output:
   html_document:
     toc: yes
     toc_float: yes
 ---
 
-# [SLCU R Course](https://tavareshugo.github.io/slcu_r_course/)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
-## Data Visualization with R
+[back to course home](https://tavareshugo.github.io/slcu_r_course/)
+
+# Data Visualization with R
 
 In this lesson we will learn how to explore tabular data, perform basic sanity 
 checks and do visualizations with [``ggplot2``](http://ggplot2.org/).
@@ -56,7 +61,7 @@ For this lesson we will use a slightly simplified version of a dataset published
 by [Burghard et al 2015](http://datadryad.org/resource/doi:10.5061/dryad.65d76). 
 
 
-## Read the data
+# Read and check the data
 
 The simplified version of the data set can be found in the ``module02_data_viz_ggplot/data`` 
 folder (`burghardt_et_al_2015_expt1.csv`). 
@@ -78,7 +83,7 @@ contain "numeric"-type data (which can be "integer" if they have no decimal
 points, or "double" if they do).
 
 
-## Look at the data
+## Inspecting the data - quality control
 
 To get a glimpse of the data, we can type the name of the variable we have stored 
 it in (`expt1`).
@@ -157,7 +162,7 @@ help pages.
 of its beginning? How would you do it in R? (hint: ``?tail``)
 
 
-## Visual representation of your data
+## Visual inspection of your data
 
 To get a "birds-eye" view at the data, to identify its structure and potential 
 problems we can simply plot it in 
@@ -172,7 +177,7 @@ vis_dat(expt1)
 Can you spot any potential problems?
 
 
-### Missing values
+## Missing values
 
 You might have noticed that some of the cells are plotted in gray - these indicate 
 missing values. Missing values can occur in a data set when a certain observation 
@@ -195,10 +200,10 @@ expt1 <- drop_na(expt1)
 missing values? 
 
 
-## Plots! Plots! Plots!
+# Plots! Plots! Plots!
 
 Now that we have learned some basics of our data set, we will go straight to 
-plotting to get even more insights. 
+plotting to get even more insights about this experiment. 
 
 For this we will be using the `ggplot2` package, which follows a general scheme 
 termed "grammar or graphics".
@@ -230,9 +235,9 @@ Aesthetics can be set with `aes()` function. Note, different ``geom_``
 objects can understand only a subset of aesthetics. For details, check their 
 respective help (e.g. ``?geom_line``)    
 
-You can find more imformation about how to build graphs with `ggplot2` in [this very useful document](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+You can find more imformation about how to build graphs with `ggplot2` in [this very useful cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf).
 
-### Building a graph with ggplot2
+## Building a graph with ggplot2
 
 Everyone (except Excel) likes boxplots, so we will start by plotting `days.to.flower` 
 variable measured for different genotypes. 
@@ -270,7 +275,7 @@ ggplot(expt1, aes(genotype, days.to.flower)) +
 > **Challenge:** can you make a violin plot instead? (hint: ``?geom_violin``)
 
 
-### Adding multiple layers
+## Adding multiple layers
 
 Let's now layer a couple of ``geom_objects`` on the same plot. 
 Say, we want to have points for the individual values together with our boxplots:
@@ -285,7 +290,7 @@ ggplot(expt1, aes(genotype, rosette.leaf.num)) +
 boxplots rather than behind them?
 
 
-### Colours!
+## Colours!
 
 We can also modify the appearance of our geometry, for example it's colour:
 
@@ -355,7 +360,7 @@ between `blade.length.mm` and `rosette.leaf.num` and colour the points by
 > What happens if you colour the points by `days.to.bolt`?
 
 
-### Facetting
+## Facetting
 
 Often, our data has several grouping variables, and colours alone are not enough 
 to fully represent the differences in the dataset. 
@@ -366,41 +371,56 @@ very crowded. What if we wanted to isolate each genotype in individual plots?
 This easy to accomplish with `ggplot2` by adding a "facet" layer to our plot. 
 There are two types of facets:
 
+- `facet_grid()` - arranges sub-plots in rows and/or columns
 - `facet_wrap()` - arranges sub-plots in a ribbon that "wraps" around 
 after a fixed number of plots
-- `facet_grid()` - arranges sub-plots in rows and/or columns
 
-Let's start with `facet_wrap()` and see it in action:
+Let's start with `facet_grid()` and see it in action:
 
-```{r decomposed plot}
+```{r}
 ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
     geom_point() +
-    facet_wrap( ~ genotype)
+    facet_grid(genotype ~ temperature)
 ```
+
+In the code above, we use `facet_grid()` to define variables that partition our 
+data by rows and columns, using the notation `(rows ~ columns)`.
 
 >**Challenge:** In the previous graph, colouring the genotype is redundant with 
 the facetting. Can you think of a more useful way to colour the points?
 
-Now let's see how the same code works with `facet_grid()`:
+It is possible to use `facet_grid()` with a single variable:
 
 ```{r}
-ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
+# Facet by rows
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = fluctuation)) +
+    geom_point() +
+    facet_grid(genotype ~ .)
+
+# Facet by columns
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = fluctuation)) +
     geom_point() +
     facet_grid(. ~ genotype)
 ```
 
-In this case, our facets are arranged in individual columns. We can arrange them 
-in rows like so:
+When we are only partitioning by one variable, often `facet_wrap()` produces a 
+better display. For example:
 
-```{r}
-ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
+```{r decomposed plot}
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = fluctuation)) +
     geom_point() +
-    facet_grid(genotype ~ .)
+    facet_wrap( ~ genotype)
 ```
 
 >**Challenge:** Can you modify the previous graph to facet the data by the 
 `fluctuation` treatment (as rows) and `day.length` (as columns) and colour the 
 points by genotype.
+
+```{r, echo = FALSE}
+ggplot(expt1, aes(blade.length.mm, rosette.leaf.num, colour = genotype)) +
+  geom_point() +
+  facet_grid(fluctuation ~ day.length)
+```
 
 In conclusion, **by effectively combining facets, colours and other aesthetics 
 you can represent many dimensions of your data in a single graph!**
@@ -413,7 +433,7 @@ you can represent many dimensions of your data in a single graph!**
 >**Hint**: facet the plot by `day.length` and `temperature` and fill the boxplots by `fluctuation`.
 
 
-### Interactivity!
+## Interactivity!
 
 But even this is not the limit. We can easily turn our plots into 
 interactive ones using the `plotly` package. 
@@ -485,28 +505,32 @@ ggplot(expt1, aes(genotype, days.to.flower, fill = fluctuation)) +
   scale_fill_brewer(palette="Dark2")
 ```
 
-## Homework
+# Homework
 
 Based on the principles outlined in this module, try and build a graph of your own dataset using `ggplot2`.
 
 If you encounter any difficulties, we will discuss them in the next module!
 
-## Extras
+# Extras
 
 Some other packages that add functionality to `ggplot2`:
 
 - [`gridExtra`](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html) 
+or [`patchwork`](https://github.com/thomasp85/patchwork) 
 to combine several plots together
 - [`ggthemes`](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html) 
 to add extra themes and geometries
 - [`ggridges`](https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html) 
-to produce "ridge" plots (also known as "joyplots")
+to produce "ridge" plots
 - [`GGally`](https://ggobi.github.io/ggally/) for automatically plotting 
 relationships between data
 
-## Useful link
+# Useful links
 
 - [Other cheat sheets!](https://www.rstudio.com/resources/cheatsheets/)
 
+-------
+
+[back to course home](https://tavareshugo.github.io/slcu_r_course/)
 
 
