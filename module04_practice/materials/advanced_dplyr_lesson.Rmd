@@ -1,23 +1,23 @@
 ---
+title: SLCU R Course
 output:
   html_document:
     toc: yes
     toc_float: yes
 ---
 
+[back to course home](https://tavareshugo.github.io/slcu_r_course/)
 
-# [SLCU R Course](https://tavareshugo.github.io/slcu_r_course/)
-
-## Advanced data manipulation with R
+# Advanced data manipulation with R
 
 In this module we are going to see how to do more advanced data manipulation
 using `dplyr`, which is also a part of the `tidyverse` package family.
 
 We will learn how to:
 
+- Combine (join) data sets
 - Gather columns into rows (from wide to long format)
 - Spread rows into columns (from long to wide format)
-- Combine data sets
 - Order rows by values of a column
 
 First let's load the `tidyverse` package:
@@ -26,12 +26,10 @@ First let's load the `tidyverse` package:
 library(tidyverse)
 ```
 
+We will use example datasets that come with R (no need to read it from anywhere).
 
-###  Modifying the format of your data (`gather()` and `spread()`)
 
-Often, we might have data in what is sometimes called a "wide" format. For example, 
-in the following table we have the expression values of two genes (columns) in 
-three samples (rows):
+## Combining datasets (`*_join()`)
 
 ```{r}
 # Create an example table
@@ -41,70 +39,6 @@ gene_expression <- tibble(sample = LETTERS[1:3],
 gene_expression
 ```
 
-This format is convenient if we wanted to plot the correlation of expression 
-between the two genes in each sample, for example:
-
-```{r}
-ggplot(gene_expression, aes(gene1, gene2)) + geom_point()
-```
-
-But what if we wanted to plot the distribution of each gene's expression  
-(with gene on the x-axis and expression value on the y-axis)?
-
-We would instead want our table to be in a "long" format, like this:
-
-```{r, echo = FALSE}
-gene_expression %>% 
-  gather(gene_id, expression, gene1:gene2) %>% 
-  knitr::kable()
-```
-
-There is a pair of `dplyr` functions that can convert data from one format to 
-the other. They are called `gather()` and `spread()`.
-
-To "gather" data (i.e. from a "wide" to a "long" format), we do:
-
-```{r}
-gene_expression_long <- gene_expression %>% 
-  gather(gene_id, expression, gene1, gene2)
-gene_expression_long
-```
-
-`gather()` needs three things:
-
-- the name of the new column containing the old column names is (in this case 
-`gene_id`)
-- the name of the new column containing the values of the old columns (in this 
-case `expression`)
-- the name of all the old columns we want to gather together
-
-Notice that `gather()` takes care of filling in the `sample` column with the values 
-corresponding to each new row of this table (in this case, each sample ID now appears 
-twice). 
-
-Now we can do the plot we wanted:
-
-```{r}
-ggplot(gene_expression_long, aes(gene_id, expression, colour = sample)) + 
-  geom_point()
-```
-
-
-To "spread" the data (long --> wide), we would do:
-
-```{r}
-gene_expression_long %>% 
-  spread(gene_id, expression)
-```
-
-`spread()` only needs two things:
-
-- the name of the column that contains the values that will become the new column 
-names
-- the name of the column that contains the values of interest
-
-
-### Combining data sets
 
 Often, we might want to combine 2 data sets based on the values in one column. 
 For this we can use several variations of the `*_join` functions.  
@@ -173,118 +107,260 @@ These functions are very useful to compare big datasets:
 - `full_join()` is equivalent to the _union_ of the samples in the two data sets.
 
 
-### Sorting data
+##  Reshapping data (`gather()` and `spread()`)
 
-Sometimes, we might want to order our data based on the values in one column. 
-For this, we can use `arrange()`:
+Often, we might have data in what is sometimes called a "wide" format. 
+
+For example, in the `iris` dataset, we have classic data of petal and sepal 
+lengths and widths in three Iris species. 
+In this table, each organ's measurement has its own column:
 
 ```{r}
-# Sort table by gene3's expression
-arrange(gene_expression_more, gene3)
+# For convenience convert the iris dataset to a tibble (so it doesn't print out of the screen!)
+iris <- as_tibble(iris)
+iris
 ```
 
-The default is to order values from low to high. 
-If we want to order from high to low, we have to specify it using `desc()`:
+This format is convenient if we wanted to plot the correlation between these 
+measurements, for example:
 
 ```{r}
-arrange(gene_expression, desc(gene1))
-```
-
-
-### Seperate one column into several ones
-
-Sometimes, we might have different kind of information into one column and want to split it into several ones. 
-For this, we can use `separate()`.
-
-First, let's open a data with a column we would like to split:
-```{r}
-genotypes_to_split <- read_csv("../data/Genotypes_to_split.csv")
-genotypes_to_split
-```
-
-Now let's separate the first column into 2 columns with information about thr mutation in one column and about the ecotype in the other. For this we use `separate()`:
-
-```{r}
-genotypes_split <- separate(genotypes_to_split, genotype, into=c("mutant","ecotype"), sep=" ")
-genotypes_split
-```
-Note how `separate()` removed the original column and replaced it with the newly created ones.
-
-
-`seperate()` function needs four things:
-
-- the name of the data set
-- the name of the column to separate
-- the names of the columns to create (`into=c("mutant","ecotype")`) 
-- the type of separator to split the column (`sep=" "`).
-
-
-### Changing order of labels in plots
-
-In the plot we previously did showing our gene expression distribution:
-
-```{r}
-ggplot(gene_expression_long, aes(gene_id, expression, colour = sample)) + 
+ggplot(iris, aes(Petal.Length, Sepal.Length, colour = Species)) + 
   geom_point()
 ```
 
-We can see that the order in which `gene_id` is plotted is alphabetical. This is 
-the case, even if the order of the genes on the table is not alphabetical.
+But what if we wanted to plot the distribution (as boxplots) of each organ's length
+and width?
 
-But what if we wanted _gene2_ to come first and _gene1_ to come after?
+We would instead want our table to be in a "long" format, like this:
 
-For this, we need to convert our `gene_id` variable to a special type called 
+```{r, echo = FALSE}
+set.seed(11)
+iris %>% 
+  gather(trait, size, -Species) %>% 
+  sample_n(10) %>% 
+  arrange(Species, trait) %>% 
+  knitr::kable()
+```
+
+There is a pair of `dplyr` functions that can convert data from one format to 
+the other. They are called `gather()` and `spread()`.
+
+Here is a schematic representation of what these two functions do:
+
+![](http://www.datacarpentry.org/R-ecology-lesson/img/gather_data_R.png)
+
+![](http://www.datacarpentry.org/R-ecology-lesson/img/spread_data_R.png)
+
+To "gather" data (i.e. from a "wide" to a "long" format), we do:
+
+```{r}
+iris_long <- iris %>% 
+  mutate(flower_id = 1:n()) %>%         # Make an identifier for each flower
+  gather(trait, size, -Species, -flower_id)
+iris_long
+```
+
+`gather()` needs three things:
+
+- the name of the new column containing the old column names (in this case 
+`trait`)
+- the name of the new column containing the values of the old columns (in this 
+case `size`)
+- the name of all the old columns we want to gather together
+
+Notice that `gather()` takes care of filling in the `id` column with the values 
+corresponding to each new row of this table (in this case, each flower ID now appears 
+four times - because we have four measurements per flower). 
+
+Now we can do the plot we wanted:
+
+```{r}
+ggplot(iris_long, aes(trait, size, fill = Species)) + 
+  geom_boxplot()
+```
+
+To "spread" the data (long --> wide), we would do:
+
+```{r}
+iris_long %>% 
+  spread(trait, size)
+```
+
+`spread()` only needs two things:
+
+- the name of the column that contains the values that will become the new column 
+names
+- the name of the column that contains the values of interest
+
+
+## Separate one column into several ones
+
+Sometimes, we might have different kind of information in one column and want 
+to split it into several ones. For this, we can use `separate()`.
+
+For example, in the `iris_long` object, we might want to separate the `trait` 
+column into a column indicating the flower organ (petal or sepal) and another 
+one indicating the type of measurement (width or length). 
+
+These two pieces of information are separated by a `.`:
+
+```{r}
+unique(iris_long$trait)
+```
+
+Using `separate()`, we can separate the values in this column into two columns:
+
+```{r}
+# Automatic guess
+iris_long %>% 
+  separate(trait, c("organ", "measure"))
+```
+
+Note how `separate()` removed the original column and replaced it with the newly 
+created ones.
+
+With this new trick, we can now create a slightly different plot:
+
+```{r}
+iris_long %>% 
+  separate(trait, c("organ", "measure")) %>% 
+  ggplot(aes(Species, size, fill = measure)) +
+  geom_boxplot() +
+  facet_grid( ~ organ)
+```
+
+
+In the code above, we let `separate()` "guess" what the separator was (by default 
+it finds any non-alphanumeric character). But we can be explicit, by telling it 
+the separator is a `.`. However, the dot `.` symbol is a special character used in 
+_regular expressions_. This is beyond the scope of this course, but in summary,
+regular expressions allow us to find patterns in character strings. (see 
+[here](http://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions) 
+if you want to know more about them - they can be very useful to match patterns 
+in our data!) 
+
+Because of this special use of the dot `.` symbol, we need to tell the function 
+to ignore the special meaning of the dot `.` symbol by prefixing it with `\\`:
+
+```{r}
+iris_long %>% 
+  separate(trait, c("organ", "measure"), 
+           sep = "\\.", 
+           remove = FALSE)
+```
+
+Notice how above we also retained the original column name.
+
+Note: the reverse of `separate()` is `unite()`:
+
+```{r}
+iris_long %>% 
+  separate(trait, c("organ", "measure")) %>% 
+  unite(trait, organ, measure, sep = ".")
+```
+
+
+## Changing order of labels in plots
+
+In the following boxplot
+
+```{r}
+ggplot(iris, aes(Species, Sepal.Width)) + 
+  geom_boxplot()
+```
+
+the order in which `Species` are plotted is alphabetical. This is the case, even 
+if the order of the Species on the table was not alphabetical.
+
+But what if we wanted a different order?
+
+For this, we need to convert our `Species` variable to a special type called 
 **factor**. Factors are a special type of character variables, where we define 
 _levels_, which are the unique values we have in our variable. 
 
 We can convert a variable to a factor using the `factor()` function:
 
 ```{r}
-# Convert gene_id to a factor:
-factor(gene_expression_long$gene_id)
+# Convert Species to a factor:
+factor(iris$Species)
 ```
 
-We can see that our `gene_id` variable contains two levels, corresponding to 
-each of the genes. The levels were automatically defined based on their alphabetical 
+We can see that our `Species` variable contains three levels, corresponding to 
+each of the species. The levels were automatically defined based on their alphabetical 
 order. We can change this by specifying the levels ourselves:
 
 ```{r}
-factor(gene_expression_long$gene_id, levels = c("gene2", "gene1"))
+factor(iris$Species, levels = c("versicolor", "virginica", "setosa"))
 ```
 
 Once we convert our variable to a factor, we can use it to plot categorical variables 
 in the order we wish:
 
 ```{r}
-# Using mutate to modify the gene_id column into a factor with custom level order
-# pipe it directly to ggplot to avoid creating intermediate variables
-gene_expression_long %>% 
-  mutate(gene_id = factor(gene_id, levels = c("gene2", "gene1"))) %>% 
-  ggplot(aes(gene_id, expression, colour = sample)) +
-  geom_point()
+# Using mutate to modify the Species column into a factor with custom level order
+iris %>% 
+  mutate(Species = factor(Species, levels = c("virginica", "versicolor", "setosa"))) %>% 
+  ggplot(aes(Species, Sepal.Width)) + 
+  geom_boxplot()
+```
+
+What if we wanted to order the species based on their Sepal.Length?
+The `forcats` package (part of `tidyverse`) has a very useful function 
+for this, `fct_reorder()`!
+
+```{r}
+iris %>% 
+  mutate(Species = fct_reorder(Species, Sepal.Width)) %>% 
+  ggplot(aes(Species, Sepal.Width)) + 
+  geom_boxplot()
 ```
 
 
-### Some key points to remember
+## Sorting data
+
+Sometimes, we might want to order our data based on the values in one column. 
+For this, we can use `arrange()`:
+
+```{r}
+iris %>% 
+  arrange(Petal.Width)
+```
+
+The default is to order values from low to high. 
+If we want to order from high to low, we have to specify it using `desc()`:
+
+```{r}
+iris %>% 
+  arrange(desc(Petal.Width))
+```
+
+
+
+## Key points to remember
 
 - `dplyr` has many many useful functions to manipulate tables
 - Today we have seen: 
+    - `left_join()`, `right_join()`, `full_join()`, `inner_join()` and `anti_join()`
     - `gather()` 
     - `spread()`
-    - `left_join()`, `right_join()`, `full_join()`, `inner_join()` and `anti_join()`
     - `arrange()`
     - `separate()`
-- Change the order of categorical variables in your graphs using `factor()`
+- Change the order of categorical variables in your graphs using `factor()` and `fct_reorder()`
 - There are many `dplyr` functions we did not cover, but two additional useful 
 ones are:
     - `rename()` to change column names
     - `top_n()` to filter the table based on the top/bottom entries of a column
 
 
-### Futher reading and additional resources:
+### Further reading and additional resources:
 
 - [dplyr cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 - [data transformation chapter from 'R for Data Science'](http://r4ds.had.co.nz/transform.html)
 
+
+-------
+
+[back to course home](https://tavareshugo.github.io/slcu_r_course/)
 
 
