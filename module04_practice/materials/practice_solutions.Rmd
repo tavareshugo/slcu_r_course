@@ -91,7 +91,7 @@ dim(data_long)
 dim(mydata)
 ```
 
-### 4.2. Tidy varibales
+### 4.2. Tidy variables
 
 You might have noticed that now you have a column that contains several 
 variables cramped together: time and temperature. Let's split it in 4 
