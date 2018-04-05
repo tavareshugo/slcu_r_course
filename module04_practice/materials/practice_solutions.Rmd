@@ -12,7 +12,7 @@ output:
 
 ## 1. Set up the environment 
 
-We will need to load these 4 libraries
+We will need to load these 3 libraries
 
 ```{r, message = FALSE}
 library(visdat) # for initial inspection of data
@@ -28,7 +28,7 @@ setwd("/home/username/Documents/slcu_course/module04_practice/materials")
 ```
 
 
-## 2. Download the data
+## 2. Read the data
 
 Please, note, here we are using `read_tsv()` because original file is
 tab-separated, not comma-separated ('csv')
@@ -166,7 +166,7 @@ ggplot(data_long, aes(time, expression, colour = time)) +
   annotation_logticks(sides = "lr")  # add some tick marks on the left and right side
 ```
 
-### 5.2 Plot your favourite genes.
+### 5.2 Plot your favourite genes
 
 Say, now we are interested in 10 specific genes and we want to visualize their 
 expression in different temperatures over time.
