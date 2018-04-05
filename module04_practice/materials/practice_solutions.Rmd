@@ -79,6 +79,8 @@ data_long <- mydata %>%
 # Or this - all columns that contain the word "TPM" in their name
 data_long <- mydata %>% 
     gather(sample, expression, contains("TPM"))
+
+head(data_long)
 ```
 
 Check dimesions in the long-format dataset, do they match your expectatios? 

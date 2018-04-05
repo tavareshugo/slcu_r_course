@@ -287,7 +287,18 @@ data_long &lt;- mydata %&gt;%
 
 # Or this - all columns that contain the word &quot;TPM&quot; in their name
 data_long &lt;- mydata %&gt;% 
-    gather(sample, expression, contains(&quot;TPM&quot;))</code></pre>
+    gather(sample, expression, contains(&quot;TPM&quot;))
+
+head(data_long)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   gene      sample           expression
+##   &lt;chr&gt;     &lt;chr&gt;                 &lt;dbl&gt;
+## 1 AT1G01060 TPM_wt_17c_15min     377   
+## 2 AT1G01240 TPM_wt_17c_15min       7.70
+## 3 AT1G01390 TPM_wt_17c_15min      13.4 
+## 4 AT1G01500 TPM_wt_17c_15min       4.96
+## 5 AT1G02460 TPM_wt_17c_15min       1.90
+## 6 AT1G02660 TPM_wt_17c_15min      11.4</code></pre>
 <p>Check dimesions in the long-format dataset, do they match your expectatios? <strong>Hint:</strong> compare with dimensions of the original dataset with dim() function.</p>
 <pre class="r"><code>dim(data_long)</code></pre>
 <pre><code>## [1] 6210    3</code></pre>
