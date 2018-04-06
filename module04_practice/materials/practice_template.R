@@ -75,7 +75,7 @@ mydata <- read_tsv("../data/TPM-light-WT-17c-27c-RNA-seq-average-rep1-rep2_misex
 # When dealing with expression data we often have lots of genes that are barely 
 # expressed. Let's get rid of them, this should slightly reduce the size of our
 # dataset.
-# Hint: use filter() to select rows with expression values greater than 1 TPM.
+# Hint: use filter() to select rows with expression values greater than or equal to 1 TPM.
 
 
 

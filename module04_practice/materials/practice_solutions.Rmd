@@ -101,6 +101,7 @@ columns: ``units``, ``genotype``, ``time`` and ``temperature`` using ``separate(
 data_long <- separate(data_long, sample, 
                       into = c("units", "genotype", "temperature", "time"),
                       sep = "_")
+head(data_long)
 ```
 
 Does the transformed dataset looks as expected? Use `View()` or `head()` to make sure.
@@ -113,6 +114,7 @@ The values in those two columns are always the same, so we want to remove them.
 
 ```{r}
 data_long <- select(data_long, gene, expression, temperature, time)
+head(data_long)
 ```
 
 
@@ -122,7 +124,7 @@ When dealing with expression data we often have lots of genes that are barely
 expressed. Let's get rid of them, this should slightly reduce the size of our
 dataset.
 
-> Hint: use ``filter()`` to select rows with expression values greater than 1 TPM.
+> Hint: use ``filter()`` to select rows with expression values greater than or equal to 1 TPM.
 
 ```{r}
 data_long <- filter(data_long, expression >= 1)
